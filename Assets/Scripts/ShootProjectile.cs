@@ -8,8 +8,6 @@ public class ShootProjectile : MonoBehaviour
 
     [SerializeField] private Transform _shootingPointTransform;
 
-
-
     [SerializeField] private ObjectPool _destructionObjectPool;
 
     [SerializeField] private ObjectPool _disruptionObjectPool;
@@ -18,58 +16,51 @@ public class ShootProjectile : MonoBehaviour
     [SerializeField] private PlayerValues _playerValues;
 
 
+    public float _destructionCooldownTimer;
+    public float _disruptionCooldownTimer;
 
-    private float _destructionCooldownTimer = 0f;
-    private float _disruptionCooldownTimer = 0f;
+    private void Start()
+    {
+        _destructionCooldownTimer = _playerValues.destructionWaveCooldown;
+        _disruptionCooldownTimer = _playerValues.disruptionWaveCooldown;
+}
 
     private void Update()
     {
-        _destructionCooldownTimer += Time.deltaTime;
-        _disruptionCooldownTimer += Time.deltaTime;
-
+        _destructionCooldownTimer -= Time.deltaTime;
+        _disruptionCooldownTimer -= Time.deltaTime;
 
         //left click
         if (Input.GetMouseButtonDown(0))
         {
-            switch (_playerValues.playerWaveType)
+            _playerValues.playerWaveType = PlayerValues.waveType.Destruction;
+            if (_destructionCooldownTimer <= 0)
+
             {
-                case PlayerValues.waveType.Destruction:
-                    if (_destructionCooldownTimer >= _playerValues.destructionWaveCooldown)
-                    {
-                        shoot();
-                        _destructionCooldownTimer = 0f;
-                    }
-
-                    break;
-                case PlayerValues.waveType.Disruption:
-
-                    if (_disruptionCooldownTimer >= _playerValues.disruptionWaveCooldown)
-                    {
-                        shoot();
-                        _disruptionCooldownTimer = 0f;
-                    }
-                    break;
+                GameObject projectile = _destructionObjectPool.GetPooledObject();
+                shoot(projectile);
+                _destructionCooldownTimer = _playerValues.destructionWaveCooldown;
             }
+        }
 
+        //right click
+        if (Input.GetMouseButtonDown(1))
+        {
+            _playerValues.playerWaveType = PlayerValues.waveType.Disruption;
+            if (_disruptionCooldownTimer <= 0)
+            {
+                GameObject projectile = _disruptionObjectPool.GetPooledObject();
+                shoot(projectile);
+                _disruptionCooldownTimer = _playerValues.disruptionWaveCooldown;
+            }
         }
 
     }
 
-    void shoot()
+
+
+    void shoot(GameObject projectile)
     {
-        GameObject projectile = null;
-
-        switch (_playerValues.playerWaveType)
-        {
-            case PlayerValues.waveType.Destruction:
-                projectile = _destructionObjectPool.GetPooledObject();
-                break;
-            case PlayerValues.waveType.Disruption:
-                projectile = _disruptionObjectPool.GetPooledObject();
-                break;
-        }
-
-
         if (projectile != null)
         {
             projectile.transform.position = _shootingPointTransform.position;

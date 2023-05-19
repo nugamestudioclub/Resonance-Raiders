@@ -494,6 +494,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 25.615, y: -103.502, z: -0.9}
+--- !u!114 &1484311791 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2761903001768912991, guid: 56422c5a26d7ce14f855410add85ba9b, type: 3}
+  m_PrefabInstance: {fileID: 2761903002447881392}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7905bb507f57d64bab72c8bf04d4c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1669405274
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,7 +966,8 @@ PrefabInstance:
       propertyPath: _destructionObjectPool
       value: 
       objectReference: {fileID: 169674809}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2761903001768912990, guid: 56422c5a26d7ce14f855410add85ba9b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 56422c5a26d7ce14f855410add85ba9b, type: 3}
 --- !u!1001 &4826048377145409255
 PrefabInstance:
@@ -964,6 +976,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3096906937549324354, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3096906937549324354, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3114158774082851022, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3821750391064810598, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f596e19679ede1143af416792c39d46f, type: 2}
+    - target: {fileID: 3821750391064810598, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3821750391064810598, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 341908894020563185, guid: f596e19679ede1143af416792c39d46f, type: 2}
     - target: {fileID: 4826048375858362724, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1048,10 +1084,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4826048375858362725, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 4826048375858362776, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5232306974410294100, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5232306974410294100, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7277487237560568079, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: _shootProjectile
+      value: 
+      objectReference: {fileID: 1484311791}
+    - target: {fileID: 8840743261842509354, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: f596e19679ede1143af416792c39d46f, type: 2}
+    - target: {fileID: 8840743261842509354, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840743261842509354, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 341908894020563185, guid: f596e19679ede1143af416792c39d46f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b264c3c6ce918e148a9ee7dcd2ff81d2, type: 3}
 --- !u!1001 &6514316146029892520
