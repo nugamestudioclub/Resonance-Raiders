@@ -5,7 +5,9 @@ public class PlayerValues : ScriptableObject
 {
     public int playerHealth;
 
-    public float shootCooldown;
+    public float destructionWaveCooldown;
+
+    public float disruptionWaveCooldown;
 
     public enum waveType { Destruction, Disruption };
 
