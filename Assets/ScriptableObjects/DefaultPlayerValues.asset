@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9158028d1971cf44f96323c881aa56ec, type: 3}
   m_Name: DefaultPlayerValues
   m_EditorClassIdentifier: 
-  playerHealth: 9
-  shootCooldown: 12
-  StartingWaveType: 0
+  playerHealth: 8
+  destructionWaveCooldown: 0.5
+  disruptionWaveCooldown: 0.2
+  playerWaveType: 1

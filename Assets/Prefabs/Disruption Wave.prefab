@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 513293920330972517}
   - component: {fileID: 513293920330972513}
   m_Layer: 0
-  m_Name: Wave
+  m_Name: Disruption Wave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
