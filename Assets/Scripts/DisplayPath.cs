@@ -6,13 +6,13 @@ using PathCreation;
 public class DisplayPath : MonoBehaviour
 {
     [SerializeField]
-    private Sprite _image;
+    private GameObject pathArrow;
     [SerializeField]
     private float snapSize = 1;
 
     private PathCreator _pathCreator;
 
-    public GameObject pathArrow;
+    
 
     // Start is called before the first frame update
     void Start()
