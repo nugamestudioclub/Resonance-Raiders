@@ -32,6 +32,16 @@ public class ConstructionInterferenceChecker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            Vector3 point = hit.point;
+            point /= tempGridSize;
+            point = new Vector3(Mathf.Round(point.x), Mathf.Round(point.y), Mathf.Round(point.z));
+            point *= tempGridSize;
+            detector.transform.position = point;
+        }
     }
 }
