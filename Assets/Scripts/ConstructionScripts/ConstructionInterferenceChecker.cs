@@ -21,7 +21,7 @@ public class ConstructionInterferenceChecker : MonoBehaviour
     /// <returns>true if collision exists, false if none exists.</returns>
     public bool HasCollision()
     {
-        return detector.hasInteference;
+        return false;
     }
     // Start is called before the first frame update
     void Start()
