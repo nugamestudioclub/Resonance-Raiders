@@ -1,18 +1,12 @@
-using Palmmedia.ReportGenerator.Core.Parser.Analysis;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
-
-[RequireComponent(typeof(LineRenderer))]
-[ExecuteInEditMode]
-public class ProceduralLineGeneration : MonoBehaviour
+public class ProceduralLineGeneration2 : MonoBehaviour
 {
     private LineRenderer line;
     private List<LineRenderer> lines;
-    
+
     [SerializeField]
     [Range(1, 200)]
     private float width = 5f;
@@ -23,23 +17,30 @@ public class ProceduralLineGeneration : MonoBehaviour
     [Range(2, 200)]
     [Tooltip("Number of vertices in line")]
     private int verticesCount = 20;
+    [Range(0, 5)]
+    [SerializeField]
+    [Tooltip("How far the wave expands on its sides")]
+    private float spread = 0.1f;
     //[SerializeField]
-    [Range(0,200)]
+    [Range(0, 200)]
     [Tooltip("Number of divisions between two line vertices")]
     private int subdivisions = 5;
+    [Range(0,1)]
+    [SerializeField]
+    private float velocityMultiplierOnHit = 1f;
 
     [SerializeField]
     private float clipDistance = 1f;
-
+    [HideInInspector]
+    public List<WaveCollider> colliders = new List<WaveCollider>();
+    [SerializeField]
+    private float colliderRadius = .1f;
     
+    [SerializeField]
+    private float speed = 1f;
+    [SerializeField]
+    private GameObject colliderPrefab;
 
-    private List<List<Vector3>> pointsPerSubdivision = new List<List<Vector3>>();
-    // Start is called before the first frame update
-    void Start()
-    {
-        line = GetComponent<LineRenderer>();
-        lines = new List<LineRenderer> { line };
-    }
     public List<Vector3> InterpolatePoints(Vector3 p1, Vector3 p2, Vector3 p3, int numPoints, int numSubdivisions)
     {
         List<Vector3> points = new List<Vector3>();
@@ -63,7 +64,7 @@ public class ProceduralLineGeneration : MonoBehaviour
             {
                 float t = j / (float)(numSubdivisions + 1);
                 t = Mathf.Sin(t * Mathf.PI * 0.5f); // Ease out
-                
+
                 Vector3 point = Vector3.Lerp(start, end, t);
                 points.Insert(i + j, point);
             }
@@ -86,73 +87,43 @@ public class ProceduralLineGeneration : MonoBehaviour
 
         return p;
     }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        if (Application.IsPlaying(this))
+        {
+           
+            int positionsCount = verticesCount * subdivisions;
+
+            Vector3 leftPos = -transform.right * width;
+            Vector3 rightPos = transform.right * width;
+            Vector3 centerPos = transform.forward * depth;
+
+            List<Vector3> points = InterpolatePoints(leftPos, centerPos, rightPos, verticesCount, subdivisions);
+            //line.positionCount = points.Count;
+            for (int i = 0; i < points.Count; i++)
+            {
+                GameObject childCollider = Instantiate(colliderPrefab, transform);
+                childCollider.transform.localPosition = points[i];
+                SphereCollider col = childCollider.GetComponent<SphereCollider>();
+
+                WaveCollider collider = childCollider.GetComponent<WaveCollider>();
+                collider.speed = speed;
+                collider.velocity = collider.transform.right+collider.transform.forward*((i/points.Count)-0.5f)*spread;
+                collider.velocityReductionOnHit = velocityMultiplierOnHit;
+
+                if (colliders.Count>0)
+                    colliders[colliders.Count - 1].next = collider;
+                colliders.Add(collider);
+            }
+        }
+            
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (!Application.IsPlaying(this))
-        {
-            if (line == null)
-            {
-                line = GetComponent<LineRenderer>();
-            }
-            int positionsCount = verticesCount * subdivisions;
-
-            Vector3 leftPos = -line.transform.right * width;
-            Vector3 rightPos = line.transform.right * width;
-            Vector3 centerPos = line.transform.forward * depth;
-
-            List<Vector3> points = InterpolatePoints(leftPos, centerPos, rightPos, verticesCount, subdivisions);
-            line.positionCount = points.Count;
-            for (int i = 0; i < points.Count; i++)
-            {
-                line.SetPosition(i, points[i]);
-            }
-        }
-        
-        
-        //Make sure to remove left over items.
-
-
-    }
-
-    public List<Vector3> GetPoints()
-    {
-        List<Vector3> points = new List<Vector3>();
-        for(int i = 0; i < line.positionCount; i++)
-        {
-            if (subdivisions==0 ||i % subdivisions == 0)
-            {
-                points.Add(line.GetPosition(i));
-            }
-        }
-        return points;
-    }
-    
-
-    public void UpdatePoints(List<Vector3> newPoints)
-    {
-        List<Vector3> current = this.GetPoints();
-        for(int i = 0; i < newPoints.Count; i++)
-        {
-            Vector3 deltaPos = newPoints[i] - current[i];
-            if (subdivisions == 0)
-            {
-                line.SetPosition(i, newPoints[i]);
-            }
-            else
-            {
-                for (int ii = 0; ii < subdivisions; ii++)
-                {
-                    int index = i * subdivisions + ii;
-                    if (index < line.positionCount)
-                    {
-                        line.SetPosition(index, line.GetPosition(index) + deltaPos);
-                    }
-
-                }
-            }
-            
-        }
         
     }
 }
