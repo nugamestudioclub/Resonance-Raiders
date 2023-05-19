@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class WaveCollider : MonoBehaviour
 {
+    public enum WaveType {DAMAGE,DISRUPTION}
+
+
     public float speed = 1f;
     [HideInInspector]
     public WaveCollider next;
@@ -16,7 +19,11 @@ public class WaveCollider : MonoBehaviour
     private float timeLeft = 20f;
     private float totalTime;
     public float velocityReductionOnHit = 1f;
-    
+    public Color tint;
+    public int id = 0;
+    public float damage = 0f;
+    public float disruption = 0f;
+    public WaveType type;
 
     private void Start()
     {
@@ -30,7 +37,7 @@ public class WaveCollider : MonoBehaviour
     }
     private void Update()
     {
-        
+        tint = new Color(damage, disruption, new Vector2(damage, disruption).magnitude);
         rb.position += velocity * Time.deltaTime * speed;
         //transform.localPosition += velocity * Time.deltaTime * speed;
         if (next != null&&Vector3.Distance(this.transform.position,next.transform.position)<splitThreshold)
@@ -41,7 +48,7 @@ public class WaveCollider : MonoBehaviour
             rend.SetPosition(0, Vector3.zero);
             rend.SetPosition(1, next.transform.position - transform.position);
             //Set Color opacity
-            rend.startColor = new Color(rend.startColor.r, rend.startColor.g, rend.startColor.b, timeLeft / totalTime);
+            rend.startColor = new Color(tint.r,tint.g, tint.b, timeLeft / totalTime);
             
 
             rend.endColor = rend.startColor;
@@ -76,8 +83,29 @@ public class WaveCollider : MonoBehaviour
             return new Vector2(newX, newY);
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<WaveCollider>() != null)
+        {
+            WaveCollider col = other.GetComponent<WaveCollider>();
+            if (col.id != id)
+            {
+                tint = Color.red;
+                switch (col.type)
+                {
+                    case WaveType.DISRUPTION:
+                        disruption += .5f;
+                        break;
+                    case WaveType.DAMAGE:
+                        damage += .5f;
+                        break;
+                }
+            }
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
+        
         Physics.IgnoreCollision(collision.collider, this.GetComponent<SphereCollider>(), true);
         print("collided!");
 

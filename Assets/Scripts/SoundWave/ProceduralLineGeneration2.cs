@@ -40,6 +40,11 @@ public class ProceduralLineGeneration2 : MonoBehaviour
     private float speed = 1f;
     [SerializeField]
     private GameObject colliderPrefab;
+    [SerializeField]
+    private Vector3 initialVelocity;
+    [SerializeField]
+    private WaveCollider.WaveType type;
+    
 
     public List<Vector3> InterpolatePoints(Vector3 p1, Vector3 p2, Vector3 p3, int numPoints, int numSubdivisions)
     {
@@ -87,13 +92,20 @@ public class ProceduralLineGeneration2 : MonoBehaviour
 
         return p;
     }
+    private void Awake()
+    {
+        if (GetComponentInChildren<ProceduralLineGeneration>() != null)
+        {
+            GetComponentInChildren<ProceduralLineGeneration>().gameObject.SetActive(false);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         if (Application.IsPlaying(this))
         {
-           
+            int id = Random.Range(0, 1000);
             int positionsCount = verticesCount * subdivisions;
 
             Vector3 leftPos = -transform.right * width;
@@ -110,9 +122,21 @@ public class ProceduralLineGeneration2 : MonoBehaviour
 
                 WaveCollider collider = childCollider.GetComponent<WaveCollider>();
                 collider.speed = speed;
-                collider.velocity = collider.transform.right+collider.transform.forward*((i/points.Count)-0.5f)*spread;
+                collider.velocity = initialVelocity - (collider.transform.forward*(((float)i/points.Count)-.5f)*spread);
                 collider.velocityReductionOnHit = velocityMultiplierOnHit;
-
+                collider.id = id;
+                collider.type = type;
+                switch (type)
+                {
+                    case WaveCollider.WaveType.DAMAGE:
+                        collider.damage = 1;
+                        collider.disruption = 0;
+                        break;
+                    case WaveCollider.WaveType.DISRUPTION:
+                        collider.damage = 0;
+                        collider.disruption = 1;
+                        break;
+                }
                 if (colliders.Count>0)
                     colliders[colliders.Count - 1].next = collider;
                 colliders.Add(collider);

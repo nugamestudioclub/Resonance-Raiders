@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8614310017025613752}
   - component: {fileID: 8614310017025613755}
   - component: {fileID: 7159237048915997097}
+  - component: {fileID: 1639690635801942283}
   m_Layer: 0
   m_Name: LineCollider
   m_TagString: Untagged
@@ -64,6 +65,14 @@ MonoBehaviour:
   next: {fileID: 0}
   lineRenderer: {fileID: 8614310017420907429}
   splitThreshold: 0.5
+  velocity: {x: 0, y: 0, z: 0}
+  timeLeft: 20
+  velocityReductionOnHit: 1
+  tint: {r: 1, g: 1, b: 1, a: 0}
+  id: 0
+  damage: 1
+  disruption: 0
+  type: 0
 --- !u!54 &7159237048915997097
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -80,6 +89,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 1
+--- !u!135 &1639690635801942283
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614310017025613750}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8614310017420907429
 GameObject:
   m_ObjectHideFlags: 0
