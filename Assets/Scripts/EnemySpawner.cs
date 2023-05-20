@@ -47,6 +47,7 @@ public class EnemySpawner : MonoBehaviour
 
     public bool FinishedSpawning()
     {
+        
         return spawnStack.Count == 0 && transform.childCount == 0;
     }
 }

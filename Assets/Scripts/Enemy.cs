@@ -45,8 +45,9 @@ public class Enemy : MonoBehaviour
         List<EnemyEffect> immuntableList = new List<EnemyEffect>(_effects);
         foreach (EnemyEffect e in immuntableList)
         {
-            e.Apply(this);
+           e.Apply(this);
         }
+        
         if (_health <= 0)
         {
             Destroy(gameObject);

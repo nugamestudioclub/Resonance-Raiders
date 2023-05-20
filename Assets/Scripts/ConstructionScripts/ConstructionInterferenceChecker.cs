@@ -24,6 +24,7 @@ public class ConstructionInterferenceChecker : MonoBehaviour
     {
         return detector.hasInterference;
     }
+    
     // Start is called before the first frame update
     void Start()
     {

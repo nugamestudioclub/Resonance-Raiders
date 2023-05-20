@@ -50,7 +50,7 @@ public class ProceduralLineGeneration2 : MonoBehaviour
     [SerializeField] private float maxAliveTime = 20f;
 
     private int iter = 0;
-
+    private bool firstTime = true;
     public List<Vector3> InterpolatePoints(Vector3 p1, Vector3 p2, Vector3 p3, int numPoints, int numSubdivisions)
     {
         List<Vector3> points = new List<Vector3>();
@@ -110,14 +110,15 @@ public class ProceduralLineGeneration2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (Application.IsPlaying(this))
-        {
-            
-        }
-            
+        
+    }
+    private void OnEnable()
+    {
+        iter = 0;
+        
     }
 
-    void Generate()
+    void Generate(bool isNew)
     {
         int id = Random.Range(0, 1000);
         int positionsCount = verticesCount * subdivisions;
@@ -130,7 +131,17 @@ public class ProceduralLineGeneration2 : MonoBehaviour
         //line.positionCount = points.Count;
         for (int i = 0; i < points.Count; i++)
         {
-            GameObject childCollider = Instantiate(colliderPrefab, transform);
+            GameObject childCollider;
+            if (isNew)
+                childCollider = Instantiate(colliderPrefab, transform);
+            else
+            {
+                childCollider = colliders[i].gameObject;
+                colliders[i].ResetPos();
+                childCollider.transform.parent = transform;
+                
+            }
+                
             childCollider.transform.localPosition = points[i];
 
             SphereCollider col = childCollider.GetComponent<SphereCollider>();
@@ -175,10 +186,26 @@ public class ProceduralLineGeneration2 : MonoBehaviour
         }
         if (iter == 1)
         {
-            Generate();
+            Generate(firstTime);
+            firstTime = false;
             transform.eulerAngles = iRot;
         }
-        
+        if (iter > 3)
+        {
+            int disabledCount = 0;
+            for (int i = 0; i < colliders.Count; i++)
+            {
+                if (!colliders[i].gameObject.activeInHierarchy)
+                {
+                    disabledCount++;
+                }
+            }
+            if (disabledCount == colliders.Count)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
         iter++;
     }
 }

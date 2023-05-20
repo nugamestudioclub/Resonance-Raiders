@@ -20,6 +20,13 @@ public class DisplayPath : MonoBehaviour
     [SerializeField]
     private LineRenderer line;
 
+    public void RemoveColliders()
+    {
+        Rigidbody rb = GetComponentInChildren<Rigidbody>();
+        rb.Sleep();
+    }
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,12 +57,12 @@ public class DisplayPath : MonoBehaviour
             Vector3 nextPoint = points[i + 1];
             line.SetPosition(i*2, points[i]+Vector3.up*yOffset);
             line.SetPosition(1+(i*2), points[i]+Vector3.up*yOffset);
-            /*GameObject gameObject = Instantiate(pathArrow, transform);
-
-            gameObject.transform.position = point;
-            gameObject.transform.position += Vector3.up * yOffset;
-            gameObject.transform.localScale *= arrowScale;
-            gameObject.transform.LookAt(nextPoint);*/
+            BoxCollider col = line.gameObject.AddComponent<BoxCollider>();
+            col.center = (point + ((nextPoint - point) / 2)) ;
+            col.center = new Vector3(col.center.x, -1, col.center.z);
+            col.size = new Vector3(Mathf.Max(0.9f, Mathf.Abs(nextPoint.x - point.x)),1,Mathf.Max(0.9f,Mathf.Abs(nextPoint.z-point.z)));
+            col.isTrigger = false;
+            
         }
     }
 

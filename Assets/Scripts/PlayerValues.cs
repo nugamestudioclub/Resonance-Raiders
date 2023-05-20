@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu (fileName = "New PlayerValues", menuName = "PlayerValues")]
 public class PlayerValues : ScriptableObject
 {
+    [HideInInspector]
     public int playerHealth;
 
     public float destructionWaveCooldown;
