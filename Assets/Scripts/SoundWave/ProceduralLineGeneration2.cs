@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using static WaveCollider;
 
 public class ProceduralLineGeneration2 : MonoBehaviour
 {
@@ -48,8 +50,8 @@ public class ProceduralLineGeneration2 : MonoBehaviour
     [SerializeField]
     private PlayerValues playerValues;
     [SerializeField] private float maxAliveTime = 20f;
-    
-    
+
+    private int iter = 0;
 
     public List<Vector3> InterpolatePoints(Vector3 p1, Vector3 p2, Vector3 p3, int numPoints, int numSubdivisions)
     {
@@ -105,60 +107,80 @@ public class ProceduralLineGeneration2 : MonoBehaviour
         }
     }
 
+   
+
     // Start is called before the first frame update
     void Start()
     {
         if (Application.IsPlaying(this))
         {
-            int id = Random.Range(0, 1000);
-            int positionsCount = verticesCount * subdivisions;
-
-            Vector3 leftPos = -transform.right * width;
-            Vector3 rightPos = transform.right * width;
-            Vector3 centerPos = transform.forward * depth;
-
-            List<Vector3> points = InterpolatePoints(leftPos, centerPos, rightPos, verticesCount, subdivisions);
-            //line.positionCount = points.Count;
-            for (int i = 0; i < points.Count; i++)
-            {
-                GameObject childCollider = Instantiate(colliderPrefab, transform);
-                childCollider.transform.localPosition = points[i];
-                
-                SphereCollider col = childCollider.GetComponent<SphereCollider>();
-
-                WaveCollider collider = childCollider.GetComponent<WaveCollider>();
-                collider.speed = speed;
-                collider.velocity = initialVelocity - (collider.transform.forward*(((float)i/points.Count)-.5f)*spread);
-                collider.velocityReductionOnHit = velocityMultiplierOnHit;
-                collider.id = id;
-                collider.type = type;
-                collider.playerValues = playerValues;
-                collider.timeLeft = maxAliveTime;
-                
-                switch (type)
-                {
-                    case WaveCollider.WaveType.DAMAGE:
-                        collider.damage = 1;
-                        collider.disruption = 0;
-                        
-                        break;
-                    case WaveCollider.WaveType.DISRUPTION:
-                        collider.damage = 0;
-                        collider.disruption = 1;
-                        
-                        break;
-                }
-                if (colliders.Count>0)
-                    colliders[colliders.Count - 1].next = collider;
-                colliders.Add(collider);
-            }
+            
         }
             
     }
 
+    void Generate()
+    {
+        int id = Random.Range(0, 1000);
+        int positionsCount = verticesCount * subdivisions;
+
+        Vector3 leftPos = -transform.right * width;
+        Vector3 rightPos = transform.right * width;
+        Vector3 centerPos = transform.forward * depth;
+
+        List<Vector3> points = InterpolatePoints(leftPos, centerPos, rightPos, verticesCount, subdivisions);
+        //line.positionCount = points.Count;
+        for (int i = 0; i < points.Count; i++)
+        {
+            GameObject childCollider = Instantiate(colliderPrefab, transform);
+            childCollider.transform.localPosition = points[i];
+
+            SphereCollider col = childCollider.GetComponent<SphereCollider>();
+
+            WaveCollider collider = childCollider.GetComponent<WaveCollider>();
+            collider.speed = speed;
+            collider.velocity = initialVelocity - (collider.transform.forward * (((float)i / points.Count) - .5f) * spread);
+            collider.velocityReductionOnHit = velocityMultiplierOnHit;
+            collider.id = id;
+            collider.type = type;
+            collider.playerValues = playerValues;
+            collider.timeLeft = maxAliveTime;
+
+            switch (type)
+            {
+                case WaveCollider.WaveType.DAMAGE:
+                    collider.damage = 1;
+                    collider.disruption = 0;
+
+                    break;
+                case WaveCollider.WaveType.DISRUPTION:
+                    collider.damage = 0;
+                    collider.disruption = 1;
+
+                    break;
+            }
+            if (colliders.Count > 0)
+                colliders[colliders.Count - 1].next = collider;
+            colliders.Add(collider);
+        }
+    }
+
+
+    Vector3 iRot;
     // Update is called once per frame
     void Update()
     {
+        if(iter == 0)
+        {
+            iRot = transform.eulerAngles;
+            transform.eulerAngles = Vector3.zero;
+        }
+        if (iter == 1)
+        {
+            Generate();
+            transform.eulerAngles = iRot;
+        }
         
+        iter++;
     }
 }
