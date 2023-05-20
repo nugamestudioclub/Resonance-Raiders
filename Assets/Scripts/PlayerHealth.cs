@@ -1,39 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private PlayerValues _playerValues;
 
-    [SerializeField] private Transform _healthBarTransform;
+    [SerializeField] private Slider _healthSlider;
 
-    private int _damage = 1;
+    private float _maxHealth;
 
     private void Start()
     {
-        _playerValues.playerHealth = 10;
+        _healthSlider.value = 1f;
+        _maxHealth = _playerValues.playerHealth;
     }
     private void Update()
     {
-        _healthBarTransform.localScale = new Vector3(1f, 1f, _playerValues.playerHealth);
+        _healthSlider.value = _playerValues.playerHealth / _maxHealth;
+        print(_playerValues.playerHealth / _maxHealth);
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        TakeDamage();
-    }
-
-
-    void TakeDamage()
-    {
-        Debug.Log("Player took damage");
-        _playerValues.playerHealth -= _damage;
-        if(_playerValues.playerHealth <= 0)
-        {
-            _playerValues.playerHealth = 0;
-            Debug.Log("Player out of health");
-        }
-    }
-
 }
