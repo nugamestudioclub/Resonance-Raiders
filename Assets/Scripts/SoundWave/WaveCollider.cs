@@ -15,8 +15,8 @@ public class WaveCollider : MonoBehaviour
     public float splitThreshold = 1f;
     public Vector3 velocity;
     private Rigidbody rb;
-    [SerializeField]
-    private float timeLeft = 20f;
+    
+    public float timeLeft = 20f;
     private float totalTime;
     public float velocityReductionOnHit = 1f;
     public Color tint;

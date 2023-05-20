@@ -47,6 +47,8 @@ public class ProceduralLineGeneration2 : MonoBehaviour
 
     [SerializeField]
     private PlayerValues playerValues;
+    [SerializeField] private float maxAliveTime = 20f;
+    
     
 
     public List<Vector3> InterpolatePoints(Vector3 p1, Vector3 p2, Vector3 p3, int numPoints, int numSubdivisions)
@@ -130,6 +132,7 @@ public class ProceduralLineGeneration2 : MonoBehaviour
                 collider.id = id;
                 collider.type = type;
                 collider.playerValues = playerValues;
+                collider.timeLeft = maxAliveTime;
                 
                 switch (type)
                 {
