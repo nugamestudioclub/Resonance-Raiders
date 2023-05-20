@@ -37,10 +37,7 @@ public class GameStateController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            NextRound();
-        }
+        
         switch(state)
         {
             case GameState.COMBAT:
@@ -50,6 +47,7 @@ public class GameStateController : MonoBehaviour
                 {
                     constructor.enabled = true;
                     constructor.Clear();
+                    
                     NextRound();
                     //ChangeState(GameState.PRELIMINARY);
                 }
@@ -59,6 +57,10 @@ public class GameStateController : MonoBehaviour
                 constructor.enabled = true;
                 break;
         }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            NextRound();
+        }
     }
 
     public void NextRound()
@@ -66,15 +68,17 @@ public class GameStateController : MonoBehaviour
         switch(state)
         {
             case GameState.PRELIMINARY:
-                ChangeState(GameState.COMBAT);
                 
+                ChangeState(GameState.COMBAT);
+                roundDataList[round].pathCreator.GetComponent<DisplayPath>().RemoveColliders();
+              
                 spawner.SpawnEnemies(roundDataList[round]);
                 
                 break;
             case GameState.COMBAT:
+              
                 ChangeState(GameState.PRELIMINARY);
-                if (round >= 0)
-                    roundDataList[round].pathCreator.gameObject.SetActive(false);
+                roundDataList[round].pathCreator.gameObject.SetActive(false);
                 round = round + 1;
                 roundDataList[round].pathCreator.gameObject.SetActive(true);
                 //Debug.Log("Can't start a round while a round is running");

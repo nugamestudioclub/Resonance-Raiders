@@ -8,6 +8,7 @@ public class InterferenceDetector : MonoBehaviour
     public bool hasInterference { get { return interferences.Count > 0;} }
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.GetComponent<DeflectorComponent>() != null)
         {
             interferences.Add(other.GetComponent<DeflectorComponent>());

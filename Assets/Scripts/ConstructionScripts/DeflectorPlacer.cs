@@ -23,6 +23,8 @@ public class DeflectorPlacer : MonoBehaviour
         sBallOffset = selectionBall.transform.localPosition;
         
     }
+
+
     public void Clear()
     {
         for(int i = 0; i < builtObjects.Count; i++)
