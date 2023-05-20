@@ -12,12 +12,12 @@ public class ShootProjectile : MonoBehaviour
 
     [SerializeField] private ObjectPool _disruptionObjectPool;
 
+    [SerializeField] private Transform _playerTransform;
 
     [SerializeField] private PlayerValues _playerValues;
 
-
-    public float _destructionCooldownTimer;
-    public float _disruptionCooldownTimer;
+    [HideInInspector] public float _destructionCooldownTimer;
+    [HideInInspector] public float _disruptionCooldownTimer;
 
     private void Start()
     {
@@ -64,9 +64,14 @@ public class ShootProjectile : MonoBehaviour
         if (projectile != null)
         {
             projectile.transform.position = _shootingPointTransform.position;
-            projectile.transform.Rotate(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
             projectile.SetActive(true);
-            projectile.GetComponent<Rigidbody>().velocity = _shootingPointTransform.forward * 20f;
+            projectile.GetComponent<ProceduralLineGeneration2>().initialVelocity = _shootingPointTransform.forward;
+            projectile.transform.forward = _shootingPointTransform.forward;
+            //projectile.transform.rotation = Quaternion.identity;
+            //projectile.transform.Rotate(new Vector3(0f, _playerTransform.rotation.y, 0f));
+            //projectile.transform.rotation = Quaternion.Euler(0f, 0f, _playerTransform.rotation.y);
+            //Debug.Log(projectile.transform.rotation);
+            //Debug.Log(_playerTransform.rotation.y);
         }
     }
 }
