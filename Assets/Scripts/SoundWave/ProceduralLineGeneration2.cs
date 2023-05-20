@@ -123,6 +123,7 @@ public class ProceduralLineGeneration2 : MonoBehaviour
             {
                 GameObject childCollider = Instantiate(colliderPrefab, transform);
                 childCollider.transform.localPosition = points[i];
+                
                 SphereCollider col = childCollider.GetComponent<SphereCollider>();
 
                 WaveCollider collider = childCollider.GetComponent<WaveCollider>();
