@@ -24,7 +24,7 @@ public class RotateTowardsMouse : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         _screenPosition = Input.mousePosition;

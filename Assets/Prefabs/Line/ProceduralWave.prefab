@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 2
   depth: 2
-  verticesCount: 20
+  verticesCount: 9
   spread: 0.1
   velocityMultiplierOnHit: 0.881
   clipDistance: 1

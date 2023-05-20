@@ -63,6 +63,13 @@ public class WaveCollider : MonoBehaviour
         timeLeft -= Time.deltaTime;
         if (timeLeft <= 0)
         {
+            //this.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
+            //Destroy(this.gameObject);
+        }
+
+        if (transform.position.x > playerValues.xBoundary[1]||transform.position.x < playerValues.xBoundary[0] || transform.position.z > playerValues.yBoundary[1] || transform.position.z < playerValues.yBoundary[0])
+        {
             this.gameObject.SetActive(false);
         }
     }
@@ -124,6 +131,16 @@ public class WaveCollider : MonoBehaviour
                         break;
                 }
             }
+        }
+        
+        if(other.GetComponent<Enemy>()!= null)
+        {
+            Enemy e = other.GetComponent<Enemy>();
+            
+            EnemyEffect effect = new Damage(Mathf.RoundToInt(damage));
+            e.AddEffect(effect);
+            effect = new ChangeSpeed(disruption, playerValues.disruptionDuration);
+            e.AddEffect(effect);
         }
     }
     private void OnCollisionEnter(Collision collision)
