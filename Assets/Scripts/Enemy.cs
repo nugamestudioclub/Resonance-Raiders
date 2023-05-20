@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
     private float _distanceTraveled;
     private List<EnemyEffect> _effects = new List<EnemyEffect>();
 
+    public Collider _collider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,11 @@ public class Enemy : MonoBehaviour
         else
         {
             transform.position = pathCreator.path.GetPointAtDistance(0);
+        }
+        _collider = gameObject.GetComponent<Collider>();
+        if (_collider == null)
+        {
+            Debug.Log("Collider not set");
         }
     }
 
