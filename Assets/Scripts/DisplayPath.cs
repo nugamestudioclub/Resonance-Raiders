@@ -15,6 +15,8 @@ public class DisplayPath : MonoBehaviour
 
     [SerializeField]
     private float yOffset = 1;
+    [SerializeField]
+    private float arrowScale = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +50,7 @@ public class DisplayPath : MonoBehaviour
 
             gameObject.transform.position = point;
             gameObject.transform.position += Vector3.up * yOffset;
+            gameObject.transform.localScale *= arrowScale;
             gameObject.transform.LookAt(nextPoint);
         }
     }
