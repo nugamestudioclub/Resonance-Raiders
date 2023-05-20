@@ -9,10 +9,11 @@ public class ConstructionInterferenceChecker : MonoBehaviour
     /// Temp variable.
     /// </summary>
     [SerializeField]
-    private float tempGridSize = 5f;
+    private PlayerValues playerValues;
 
     [SerializeField]
     private InterferenceDetector detector;
+    
     /// <summary>
     /// Function will return if there exists a collision in current structure.
     /// </summary>
@@ -21,7 +22,7 @@ public class ConstructionInterferenceChecker : MonoBehaviour
     /// <returns>true if collision exists, false if none exists.</returns>
     public bool HasCollision()
     {
-        return false;
+        return detector.hasInterference;
     }
     // Start is called before the first frame update
     void Start()
@@ -38,10 +39,10 @@ public class ConstructionInterferenceChecker : MonoBehaviour
         if (Physics.Raycast(ray, out hit))
         {
             Vector3 point = hit.point;
-            point /= tempGridSize;
+            point /= playerValues.gridSize;
             point = new Vector3(Mathf.Round(point.x), Mathf.Round(point.y), Mathf.Round(point.z));
-            point *= tempGridSize;
-            detector.transform.position = point;
+            point *= playerValues.gridSize;
+            detector.transform.position = new Vector3(point.x,1,point.z);
         }
     }
 }

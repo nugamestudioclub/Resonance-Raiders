@@ -6,31 +6,55 @@ public class DeflectorPlacer : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     [SerializeField] private GameObject deflectorPrefab;
-    [SerializeField]
-    private int deflectorCount = 0;
+    
+    public int deflectorCount = 0;
     [SerializeField] private ConstructionInterferenceChecker checker;
-    public int DeflectorCount { get { return this.deflectorCount; } }
+    
     [SerializeField] private GameObject selectionBall;
     [SerializeField] private PlayerValues playerValues;
+    [SerializeField]
+    private List<GameObject> builtObjects = new List<GameObject>();
 
     private Vector3 sBallOffset;
     // Start is called before the first frame update
     void Start()
     {
         sBallOffset = selectionBall.transform.localPosition;
+        
     }
 
-    void FixedUpdate()
+    void Update()
     {
+        
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 100))
         {
             Vector3 p = hit.point / playerValues.gridSize;
-            Vector3 gridBasedPoint = new Vector3(Mathf.Round(p.x),Mathf.Round(p.y),Mathf.Round(p.z)) * playerValues.gridSize;
-            selectionBall.transform.position = gridBasedPoint + sBallOffset;
+            Vector3 gridBasedPoint = new Vector3(Mathf.Round(p.x), Mathf.Round(p.y), Mathf.Round(p.z)) * playerValues.gridSize;
+            selectionBall.transform.position = new Vector3(gridBasedPoint.x, 1, gridBasedPoint.z);
+
+            if (Input.GetMouseButtonDown(0)&&!checker.HasCollision()&&deflectorCount>0)
+            {
+                    
+                GameObject deflector = Instantiate(deflectorPrefab, transform);
+                deflector.transform.position = new Vector3(gridBasedPoint.x, 1, gridBasedPoint.z);
+                builtObjects.Add(deflector);
+                deflectorCount--;
+            }
         }
+
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            GameObject obj = builtObjects[builtObjects.Count - 1];
+            builtObjects.Remove(obj);
+            Destroy(obj);
+            deflectorCount++;
+        }
+
+        
             
     }
 }

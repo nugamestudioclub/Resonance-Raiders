@@ -18,3 +18,4 @@ MonoBehaviour:
   playerWaveType: 1
   destructionColor: {r: 1, g: 0, b: 0, a: 1}
   distruptionColor: {r: 0, g: 0.23584908, b: 0.036110748, a: 1}
+  gridSize: 1

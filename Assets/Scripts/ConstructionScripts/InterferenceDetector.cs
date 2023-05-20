@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class InterferenceDetector : MonoBehaviour
 {
-    /*private List<Structure> interferences = new List<Structure>();*/
-    //public bool hasInterference { get { return interferences.Count > 0;} }
-    /*private void OnTriggerEnter(Collider other)
+    private List<DeflectorComponent> interferences = new List<DeflectorComponent>();
+    public bool hasInterference { get { return interferences.Count > 0;} }
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Structure>() != null)
+        if (other.gameObject.GetComponent<DeflectorComponent>() != null)
         {
-            interferences.Add((Structure)other);
+            interferences.Add(other.GetComponent<DeflectorComponent>());
+            
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.GetComponent<Structure>() != null)
+        if (other.gameObject.GetComponent<DeflectorComponent>() != null)
         {
-            interferences.Remove((Structure)other);
+            interferences.Remove(other.gameObject.GetComponent<DeflectorComponent>());
+           
         }
-    }*/
+    }
 }
