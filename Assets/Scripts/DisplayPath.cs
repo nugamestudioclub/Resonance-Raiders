@@ -47,8 +47,8 @@ public class DisplayPath : MonoBehaviour
             GameObject gameObject = Instantiate(pathArrow, transform);
 
             gameObject.transform.position = point;
-            gameObject.transform.position += Vector3.up * yOffset;
             gameObject.transform.LookAt(nextPoint);
+            gameObject.transform.position += Vector3.up * yOffset;
         }
     }
 
