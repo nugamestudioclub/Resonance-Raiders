@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
+
 public class DisplayPath : MonoBehaviour
 {
     [SerializeField]
@@ -12,7 +13,8 @@ public class DisplayPath : MonoBehaviour
 
     private PathCreator _pathCreator;
 
-    
+    [SerializeField]
+    private float yOffset = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,7 @@ public class DisplayPath : MonoBehaviour
             GameObject gameObject = Instantiate(pathArrow, transform);
 
             gameObject.transform.position = point;
+            gameObject.transform.position += Vector3.up * yOffset;
             gameObject.transform.LookAt(nextPoint);
         }
     }
