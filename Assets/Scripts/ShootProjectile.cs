@@ -80,11 +80,4 @@ public class ShootProjectile : MonoBehaviour
             print("Projectile is null!");
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Enemy>() != null)
-        {
-            _playerValues.playerHealth -= 1;
-        }
-    }
 }
