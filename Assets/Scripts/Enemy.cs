@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
     private float _distanceTraveled;
     private List<EnemyEffect> _effects = new List<EnemyEffect>();
 
+    [SerializeField]
+    private float yOffset = 1;
+
     public Collider _collider;
 
     // Start is called before the first frame update
@@ -58,7 +61,8 @@ public class Enemy : MonoBehaviour
         {
             _distanceTraveled += speed * Time.deltaTime;
 
-            this.transform.position = pathCreator.path.GetPointAtDistance(_distanceTraveled, EndOfPathInstruction.Stop);
+            transform.position = pathCreator.path.GetPointAtDistance(_distanceTraveled, EndOfPathInstruction.Stop);
+            transform.position += Vector3.up * yOffset;
             // TODO edit rotation logic when necessary
             Vector3 dir = pathCreator.path.GetDirectionAtDistance(_distanceTraveled, EndOfPathInstruction.Stop);
             float deg;
