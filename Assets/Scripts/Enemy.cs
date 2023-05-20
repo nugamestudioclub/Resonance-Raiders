@@ -6,9 +6,8 @@ using PathCreation;
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
-    private int _health = 1;
-    [SerializeField]
-    private PathCreator pathCreator;
+    private int _health = 10;
+    public PathCreator pathCreator;
     [field: SerializeField]
     public float baseSpeed { get; private set; } = 3;
     public float speed;
@@ -22,6 +21,10 @@ public class Enemy : MonoBehaviour
         if (pathCreator == null)
         {
             Debug.Log($"path creator of {name} isnt set");
+        }
+        else
+        {
+            transform.position = pathCreator.path.GetPointAtDistance(0);
         }
     }
 
