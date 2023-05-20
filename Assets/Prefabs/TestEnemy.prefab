@@ -114,3 +114,5 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   <baseSpeed>k__BackingField: 3
   speed: 0
+  yOffset: 1
+  _collider: {fileID: 0}
