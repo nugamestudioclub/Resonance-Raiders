@@ -53,6 +53,7 @@ public class ShootProjectile : MonoBehaviour
             {
                 GameObject projectile = _disruptionObjectPool.GetPooledObject();
                 shoot(projectile);
+                
                 projectile.GetComponent<ProceduralLineGeneration2>().type = WaveCollider.WaveType.DISRUPTION;
 
                 _disruptionCooldownTimer = _playerValues.disruptionWaveCooldown;
@@ -68,14 +69,22 @@ public class ShootProjectile : MonoBehaviour
         if (projectile != null)
         {
             projectile.transform.position = _shootingPointTransform.position;
+            
             projectile.SetActive(true);
             projectile.GetComponent<ProceduralLineGeneration2>().initialVelocity = _shootingPointTransform.forward;
             projectile.transform.forward = _shootingPointTransform.forward;
-            //projectile.transform.rotation = Quaternion.identity;
-            //projectile.transform.Rotate(new Vector3(0f, _playerTransform.rotation.y, 0f));
-            //projectile.transform.rotation = Quaternion.Euler(0f, 0f, _playerTransform.rotation.y);
-            //Debug.Log(projectile.transform.rotation);
-            //Debug.Log(_playerTransform.rotation.y);
+            
+        }
+        else
+        {
+            print("Projectile is null!");
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Enemy>() != null)
+        {
+            _playerValues.playerHealth -= 1;
         }
     }
 }

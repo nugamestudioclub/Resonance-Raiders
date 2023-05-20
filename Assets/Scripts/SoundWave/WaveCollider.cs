@@ -26,15 +26,26 @@ public class WaveCollider : MonoBehaviour
     public WaveType type;
     public PlayerValues playerValues;
 
+    private Vector3 initPosition;
+    private Vector3 initLPosition;
     private void Start()
     {
         totalTime = timeLeft;
         lineRenderer.GetComponent<LineRenderer>().enabled = false;
         //velocity = transform.forward;
         rb = GetComponent<Rigidbody>();
+        initPosition = rb.position;
+        initLPosition = transform.localPosition;
         //rb.AddForce(transform.right * speed, ForceMode.Impulse);
         
         //rb.velocity = transform.right * speed * Time.deltaTime;
+    }
+    public void ResetPos()
+    {
+        this.gameObject.SetActive(true);
+        this.timeLeft = totalTime;
+        rb.position = initPosition;
+        transform.localPosition = initLPosition;
     }
     private void Update()
     {

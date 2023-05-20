@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class DeflectorPlacer : MonoBehaviour
@@ -22,6 +23,14 @@ public class DeflectorPlacer : MonoBehaviour
         sBallOffset = selectionBall.transform.localPosition;
         
     }
+    public void Clear()
+    {
+        for(int i = 0; i < builtObjects.Count; i++)
+        {
+            Destroy(builtObjects[i]);
+        }
+        builtObjects.Clear();
+    }
 
     void Update()
     {
@@ -35,13 +44,13 @@ public class DeflectorPlacer : MonoBehaviour
             Vector3 gridBasedPoint = new Vector3(Mathf.Round(p.x), Mathf.Round(p.y), Mathf.Round(p.z)) * playerValues.gridSize;
             selectionBall.transform.position = new Vector3(gridBasedPoint.x, 1, gridBasedPoint.z);
 
-            if (Input.GetMouseButtonDown(0)&&!checker.HasCollision()&&deflectorCount>0)
+            if (Input.GetMouseButtonDown(0)&&!checker.HasCollision()&&deflectorCount>builtObjects.Count)
             {
                     
                 GameObject deflector = Instantiate(deflectorPrefab, transform);
                 deflector.transform.position = new Vector3(gridBasedPoint.x, 1, gridBasedPoint.z);
                 builtObjects.Add(deflector);
-                deflectorCount--;
+                
             }
         }
 
@@ -53,7 +62,7 @@ public class DeflectorPlacer : MonoBehaviour
                 GameObject obj = builtObjects[builtObjects.Count - 1];
                 builtObjects.Remove(obj);
                 Destroy(obj);
-                deflectorCount++;
+                
             }
             
         }
