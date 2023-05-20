@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
         List<EnemyEffect> immuntableList = new List<EnemyEffect>(_effects);
         foreach (EnemyEffect e in immuntableList)
         {
-            _effects[i].Apply(this);
+           e.Apply(this);
         }
         
         if (_health <= 0)
