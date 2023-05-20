@@ -48,10 +48,14 @@ public class DeflectorPlacer : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            GameObject obj = builtObjects[builtObjects.Count - 1];
-            builtObjects.Remove(obj);
-            Destroy(obj);
-            deflectorCount++;
+            if (builtObjects.Count > 0)
+            {
+                GameObject obj = builtObjects[builtObjects.Count - 1];
+                builtObjects.Remove(obj);
+                Destroy(obj);
+                deflectorCount++;
+            }
+            
         }
 
         
