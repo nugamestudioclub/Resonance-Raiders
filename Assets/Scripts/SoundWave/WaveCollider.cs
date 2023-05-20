@@ -63,7 +63,9 @@ public class WaveCollider : MonoBehaviour
         timeLeft -= Time.deltaTime;
         if (timeLeft <= 0)
         {
+            //this.gameObject.SetActive(false);
             this.gameObject.SetActive(false);
+            //Destroy(this.gameObject);
         }
 
         if (transform.position.x > playerValues.xBoundary[1]||transform.position.x < playerValues.xBoundary[0] || transform.position.z > playerValues.yBoundary[1] || transform.position.z < playerValues.yBoundary[0])
