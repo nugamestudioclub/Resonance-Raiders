@@ -80,6 +80,11 @@ public class GameStateController : MonoBehaviour
                 ChangeState(GameState.PRELIMINARY);
                 roundDataList[round].pathCreator.gameObject.SetActive(false);
                 round = round + 1;
+                if (round >= roundDataList.Count)
+                {
+                    //Scene Transition
+                    //Win screen
+                }
                 roundDataList[round].pathCreator.gameObject.SetActive(true);
                 //Debug.Log("Can't start a round while a round is running");
                 break;
