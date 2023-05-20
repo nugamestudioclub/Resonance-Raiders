@@ -39,6 +39,8 @@ public class ShootProjectile : MonoBehaviour
             {
                 GameObject projectile = _destructionObjectPool.GetPooledObject();
                 shoot(projectile);
+                projectile.GetComponent<ProceduralLineGeneration2>().type = WaveCollider.WaveType.DAMAGE;
+
                 _destructionCooldownTimer = _playerValues.destructionWaveCooldown;
             }
         }
@@ -51,6 +53,8 @@ public class ShootProjectile : MonoBehaviour
             {
                 GameObject projectile = _disruptionObjectPool.GetPooledObject();
                 shoot(projectile);
+                projectile.GetComponent<ProceduralLineGeneration2>().type = WaveCollider.WaveType.DISRUPTION;
+
                 _disruptionCooldownTimer = _playerValues.disruptionWaveCooldown;
             }
         }

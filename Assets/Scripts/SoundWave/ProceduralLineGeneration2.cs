@@ -43,8 +43,7 @@ public class ProceduralLineGeneration2 : MonoBehaviour
     [SerializeField]
     private GameObject colliderPrefab;
     public Vector3 initialVelocity;
-    [SerializeField]
-    private WaveCollider.WaveType type;
+    public WaveCollider.WaveType type;
 
     [SerializeField]
     private PlayerValues playerValues;
