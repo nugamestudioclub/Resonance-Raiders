@@ -42,10 +42,11 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         speed = baseSpeed;
-        foreach (EnemyEffect e in _effects)
+        for(int i =0;i< _effects.Count; i++)
         {
-            e.Apply(this);
+            _effects[i].Apply(this);
         }
+        
         if (_health <= 0)
         {
             Destroy(gameObject);
