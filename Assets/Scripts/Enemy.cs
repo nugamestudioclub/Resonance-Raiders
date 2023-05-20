@@ -42,7 +42,8 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         speed = baseSpeed;
-        foreach (EnemyEffect e in _effects)
+        List<EnemyEffect> immuntableList = new List<EnemyEffect>(_effects);
+        foreach (EnemyEffect e in immuntableList)
         {
             e.Apply(this);
         }
