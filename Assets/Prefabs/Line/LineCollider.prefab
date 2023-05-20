@@ -73,6 +73,7 @@ MonoBehaviour:
   damage: 1
   disruption: 0
   type: 0
+  playerValues: {fileID: 0}
 --- !u!54 &7159237048915997097
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -180,7 +181,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.4
     widthCurve:
       serializedVersion: 2
       m_Curve:

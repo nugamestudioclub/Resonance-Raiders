@@ -24,6 +24,7 @@ public class WaveCollider : MonoBehaviour
     public float damage = 0f;
     public float disruption = 0f;
     public WaveType type;
+    public PlayerValues playerValues;
 
     private void Start()
     {
@@ -37,7 +38,8 @@ public class WaveCollider : MonoBehaviour
     }
     private void Update()
     {
-        tint = new Color(damage, disruption, new Vector2(damage, disruption).magnitude);
+        tint = ColorMixing.MixColors(playerValues.destructionColor,playerValues.distruptionColor,damage,disruption);
+        
         rb.position += velocity * Time.deltaTime * speed;
         //transform.localPosition += velocity * Time.deltaTime * speed;
         if (next != null&&Vector3.Distance(this.transform.position,next.transform.position)<splitThreshold)
@@ -62,6 +64,27 @@ public class WaveCollider : MonoBehaviour
         if (timeLeft <= 0)
         {
             this.gameObject.SetActive(false);
+        }
+    }
+    public static class ColorMixing
+    {
+        public static Color MixColors(Color color1, Color color2, float value1, float value2)
+        {
+            // Normalize the values to be in the range [0, 1]
+            float totalValue = value1 + value2;
+            if (totalValue == 0)
+                return Color.black;
+
+            float normalizedValue1 = value1 / totalValue;
+            float normalizedValue2 = value2 / totalValue;
+
+            // Mix the colors based on the normalized values
+            float r = color1.r * normalizedValue1 + color2.r * normalizedValue2;
+            float g = color1.g * normalizedValue1 + color2.g * normalizedValue2;
+            float b = color1.b * normalizedValue1 + color2.b * normalizedValue2;
+            float a = color1.a * normalizedValue1 + color2.a * normalizedValue2;
+
+            return new Color(r, g, b, a);
         }
     }
     public class VectorUtils : MonoBehaviour

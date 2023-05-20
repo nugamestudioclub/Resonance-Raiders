@@ -44,6 +44,9 @@ public class ProceduralLineGeneration2 : MonoBehaviour
     private Vector3 initialVelocity;
     [SerializeField]
     private WaveCollider.WaveType type;
+
+    [SerializeField]
+    private PlayerValues playerValues;
     
 
     public List<Vector3> InterpolatePoints(Vector3 p1, Vector3 p2, Vector3 p3, int numPoints, int numSubdivisions)
@@ -126,15 +129,19 @@ public class ProceduralLineGeneration2 : MonoBehaviour
                 collider.velocityReductionOnHit = velocityMultiplierOnHit;
                 collider.id = id;
                 collider.type = type;
+                collider.playerValues = playerValues;
+                
                 switch (type)
                 {
                     case WaveCollider.WaveType.DAMAGE:
                         collider.damage = 1;
                         collider.disruption = 0;
+                        
                         break;
                     case WaveCollider.WaveType.DISRUPTION:
                         collider.damage = 0;
                         collider.disruption = 1;
+                        
                         break;
                 }
                 if (colliders.Count>0)

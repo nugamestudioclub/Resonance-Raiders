@@ -13,4 +13,8 @@ public class PlayerValues : ScriptableObject
 
     public waveType playerWaveType;
 
+    public Color destructionColor;
+    public Color distruptionColor;
+    public float gridSize = 2f;
+
 }
