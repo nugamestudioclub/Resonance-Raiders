@@ -147,7 +147,7 @@ public class WaveCollider : MonoBehaviour
     {
         
         Physics.IgnoreCollision(collision.collider, this.GetComponent<SphereCollider>(), true);
-        print("collided!");
+        
 
         ContactPoint[] contacts = collision.contacts;
         if (contacts.Length > 0)
@@ -163,7 +163,7 @@ public class WaveCollider : MonoBehaviour
             Vector3 tangent = Vector3.Cross(Vector3.up, averageNormal).normalized;
 
             // Use the tangent vector for further calculations or processing
-            Debug.Log("Tangent: " + tangent);
+            
             tangent = Quaternion.Euler(0, -90, 0) * tangent;
             velocity += tangent * 2;
             velocity *= velocityReductionOnHit;
