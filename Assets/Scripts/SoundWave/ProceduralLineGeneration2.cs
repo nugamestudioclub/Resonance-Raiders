@@ -10,7 +10,7 @@ public class ProceduralLineGeneration2 : MonoBehaviour
     private List<LineRenderer> lines;
 
     [SerializeField]
-    [Range(0, 200)]
+    [Range(1, 200)]
     private float width = 5f;
     [SerializeField]
     [Range(0, 200)]

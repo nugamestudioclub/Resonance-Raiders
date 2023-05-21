@@ -66,7 +66,7 @@ public class DisplayPath : MonoBehaviour
             col.isTrigger = false;
             
         }
-        line.SetPosition(line.positionCount - 1, points[points.Count - 1] + Vector3.up * yOffset);
+        line.SetPosition(line.positionCount - 1, points[points.Count - 1]);
     }
 
     void OnPathChanged()
