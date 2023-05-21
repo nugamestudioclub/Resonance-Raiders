@@ -18,14 +18,7 @@ public class DeflectorPlacer : MonoBehaviour
 
     private Vector3 sBallOffset;
 
-    private void OnEnable()
-    {
-        selectionBall.SetActive(true);
-    }
-    private void OnDisable()
-    {
-        selectionBall.SetActive(false);
-    }
+  
     // Start is called before the first frame update
     void Start()
     {
