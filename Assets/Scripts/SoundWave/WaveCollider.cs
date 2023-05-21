@@ -161,7 +161,10 @@ public class WaveCollider : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.GetComponent<DeflectorComponent>() == null)
+        {
+            return;
+        }
         Physics.IgnoreCollision(collision.collider, this.GetComponent<SphereCollider>(), true);
         
 
@@ -176,12 +179,24 @@ public class WaveCollider : MonoBehaviour
             averageNormal /= contacts.Length;
 
             // Calculate the tangent vector to the collision surface
-            Vector3 tangent = Vector3.Cross(Vector3.up, averageNormal).normalized;
+            Vector3 refVector = Vector3.up;
+            if (Vector3.Angle(averageNormal, Vector3.up) < 0.01f) // checking if averageNormal is close to Vector3.up
+            {
+                refVector = Vector3.right;
+            }
+
+            Vector3 helper = (Mathf.Abs(averageNormal.y) < Mathf.Abs(averageNormal.x)) ? Vector3.up : Vector3.right;
+
+            // Create two vectors perpendicular to averageNormal using Gram-Schmidt process
+            Vector3 tangent = Vector3.Cross(refVector, averageNormal).normalized;
+
+            //Vector3 bitangent = Vector3.Cross(averageNormal, tangent).normalized;
+
 
             // Use the tangent vector for further calculations or processing
-            
+
             tangent = Quaternion.Euler(0, -90, 0) * tangent;
-            velocity += tangent ;
+            velocity += tangent;
             velocity *= velocityReductionOnHit;
         }
     }

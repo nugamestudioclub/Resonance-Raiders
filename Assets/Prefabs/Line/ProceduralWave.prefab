@@ -325,7 +325,7 @@ MonoBehaviour:
   width: 1
   depth: 1.25
   verticesCount: 9
-  spread: 0.0000001
+  spread: 0
   velocityMultiplierOnHit: 0.9
   clipDistance: 5
   colliders: []

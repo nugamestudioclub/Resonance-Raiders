@@ -128,11 +128,13 @@ public class ProceduralLineGeneration2 : MonoBehaviour
         Vector3 rightPos = transform.right * width;
         Vector3 centerPos = transform.forward * depth;
 
-        List<Vector3> points = InterpolatePoints(leftPos, centerPos, rightPos, verticesCount, subdivisions);
+        List<Vector3> points = InterpolatePoints(leftPos, centerPos, rightPos, verticesCount, 0);
         //line.positionCount = points.Count;
+        print("Points:"+points.Count);
         for (int i = 0; i < points.Count; i++)
         {
             GameObject childCollider;
+            
             if (isNew)
                 childCollider = Instantiate(colliderPrefab, transform);
             else
