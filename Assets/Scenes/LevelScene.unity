@@ -1258,6 +1258,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 784344587}
+    - target: {fileID: 3226258948680958362, guid: 7f1188180779889438ce02e159ae857d, type: 3}
+      propertyPath: deflectorCount
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3226258948680958363, guid: 7f1188180779889438ce02e159ae857d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2204,7 +2208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1983005158
 MonoBehaviour:
   m_ObjectHideFlags: 0
