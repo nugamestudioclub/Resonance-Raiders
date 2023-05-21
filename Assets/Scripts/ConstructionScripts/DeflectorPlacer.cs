@@ -17,6 +17,15 @@ public class DeflectorPlacer : MonoBehaviour
     private List<GameObject> builtObjects = new List<GameObject>();
 
     private Vector3 sBallOffset;
+
+    private void OnEnable()
+    {
+        selectionBall.SetActive(true);
+    }
+    private void OnDisable()
+    {
+        selectionBall.SetActive(false);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -45,10 +54,10 @@ public class DeflectorPlacer : MonoBehaviour
             Vector3 p = hit.point / playerValues.gridSize;
             Vector3 gridBasedPoint = new Vector3(Mathf.Round(p.x), Mathf.Round(p.y), Mathf.Round(p.z)) * playerValues.gridSize;
             selectionBall.transform.position = new Vector3(gridBasedPoint.x, 1, gridBasedPoint.z);
-
+            print("Can build?:" + (!checker.HasCollision() && deflectorCount > builtObjects.Count).ToString());
             if (Input.GetMouseButtonDown(0)&&!checker.HasCollision()&&deflectorCount>builtObjects.Count)
             {
-                    
+                
                 GameObject deflector = Instantiate(deflectorPrefab, transform);
                 deflector.transform.position = new Vector3(gridBasedPoint.x, 1, gridBasedPoint.z);
                 builtObjects.Add(deflector);

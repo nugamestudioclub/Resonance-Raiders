@@ -157,7 +157,7 @@ MonoBehaviour:
   damage: 1
   disruption: 0
   type: 0
-  playerValues: {fileID: 0}
+  playerValues: {fileID: 11400000, guid: 0cb0b5acc066f0a45b05505d0dca2c03, type: 2}
 --- !u!54 &7159237048915997097
 Rigidbody:
   m_ObjectHideFlags: 0

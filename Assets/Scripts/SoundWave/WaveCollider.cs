@@ -155,6 +155,7 @@ public class WaveCollider : MonoBehaviour
             e.AddEffect(effect);
             effect = new ChangeSpeed(1-disruption, playerValues.disruptionDuration);
             e.AddEffect(effect);
+            this.gameObject.SetActive(false);
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -179,7 +180,7 @@ public class WaveCollider : MonoBehaviour
             // Use the tangent vector for further calculations or processing
             
             tangent = Quaternion.Euler(0, -90, 0) * tangent;
-            velocity += tangent * 2;
+            velocity += tangent ;
             velocity *= velocityReductionOnHit;
         }
     }
