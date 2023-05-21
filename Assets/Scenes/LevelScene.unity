@@ -940,6 +940,10 @@ PrefabInstance:
       propertyPath: _destructionObjectPool
       value: 
       objectReference: {fileID: 409267783}
+    - target: {fileID: 2761903003401899520, guid: 56422c5a26d7ce14f855410add85ba9b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56422c5a26d7ce14f855410add85ba9b, type: 3}
 --- !u!1001 &409267782
