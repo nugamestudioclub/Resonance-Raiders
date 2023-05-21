@@ -1889,6 +1889,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2761903001768912991, guid: 56422c5a26d7ce14f855410add85ba9b, type: 3}
+      propertyPath: _disruptionSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b0210341fb89e3e47aae6ee6890dadc3, type: 3}
+    - target: {fileID: 2761903001768912991, guid: 56422c5a26d7ce14f855410add85ba9b, type: 3}
+      propertyPath: _shootSFXAudioSource
+      value: 
+      objectReference: {fileID: 797228358}
+    - target: {fileID: 2761903001768912991, guid: 56422c5a26d7ce14f855410add85ba9b, type: 3}
+      propertyPath: _destructionSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2bef9806fe4f0d3409c2da1228f89b5b, type: 3}
+    - target: {fileID: 2761903001768912991, guid: 56422c5a26d7ce14f855410add85ba9b, type: 3}
       propertyPath: _disruptionObjectPool
       value: 
       objectReference: {fileID: 1331339671}
@@ -4068,6 +4080,11 @@ RectTransform:
   m_AnchoredPosition: {x: 660.93054, y: -92.22389}
   m_SizeDelta: {x: 126.29446, y: 184.44778}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!82 &797228358 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6529228776500837730, guid: 79ecfe1f60463bf40bc9410be9bb213f, type: 3}
+  m_PrefabInstance: {fileID: 417824372154392089}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &813413823
 GameObject:
   m_ObjectHideFlags: 0
@@ -9611,6 +9628,10 @@ PrefabInstance:
     - target: {fileID: 417824372965879350, guid: 79ecfe1f60463bf40bc9410be9bb213f, type: 3}
       propertyPath: m_Name
       value: Audio Controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 6529228776500837730, guid: 79ecfe1f60463bf40bc9410be9bb213f, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79ecfe1f60463bf40bc9410be9bb213f, type: 3}
