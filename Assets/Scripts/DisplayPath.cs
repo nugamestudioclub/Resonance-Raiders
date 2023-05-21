@@ -57,7 +57,7 @@ public class DisplayPath : MonoBehaviour
             Vector3 point = points[i];
             Vector3 nextPoint = points[i + 1];
             
-            line.SetPosition(i, points[i]);
+            line.SetPosition(i, points[i]+Vector3.up*yOffset);
             //line.SetPosition(1+(i*2), points[i]+Vector3.up*yOffset);
             BoxCollider col = line.gameObject.AddComponent<BoxCollider>();
             col.center = (point + ((nextPoint - point) / 2)) ;
