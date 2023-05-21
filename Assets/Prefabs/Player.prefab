@@ -290,7 +290,7 @@ MonoBehaviour:
   _shootingPointTransform: {fileID: 2761903003401899520}
   _destructionObjectPool: {fileID: 0}
   _disruptionObjectPool: {fileID: 0}
-  _playerTransform: {fileID: 0}
+  _playerTransform: {fileID: 2761903001768912986}
   _playerValues: {fileID: 11400000, guid: 0cb0b5acc066f0a45b05505d0dca2c03, type: 2}
   _destructionCooldownTimer: 0
   _disruptionCooldownTimer: 0
@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94560700813a834e9c0c8ac8e086ecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 1
   _playerValues: {fileID: 11400000, guid: 0cb0b5acc066f0a45b05505d0dca2c03, type: 2}
 --- !u!114 &3961010204347800218
 MonoBehaviour:

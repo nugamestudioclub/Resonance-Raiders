@@ -19,6 +19,11 @@ public class ShootProjectile : MonoBehaviour
     [HideInInspector] public float _destructionCooldownTimer;
     [HideInInspector] public float _disruptionCooldownTimer;
 
+    [SerializeField] private AudioSource _shootSFXAudioSource;
+    [SerializeField] private AudioClip _destructionSoundClip;
+    [SerializeField] private AudioClip _disruptionSoundClip;
+
+
     private void Start()
     {
         _destructionCooldownTimer = _playerValues.destructionWaveCooldown;
@@ -42,6 +47,8 @@ public class ShootProjectile : MonoBehaviour
                 projectile.GetComponent<ProceduralLineGeneration2>().type = WaveCollider.WaveType.DAMAGE;
                 
                 _destructionCooldownTimer = _playerValues.destructionWaveCooldown;
+
+                _shootSFXAudioSource.PlayOneShot(_destructionSoundClip);
             }
         }
 
@@ -57,6 +64,8 @@ public class ShootProjectile : MonoBehaviour
                 projectile.GetComponent<ProceduralLineGeneration2>().type = WaveCollider.WaveType.DISRUPTION;
 
                 _disruptionCooldownTimer = _playerValues.disruptionWaveCooldown;
+
+                _shootSFXAudioSource.PlayOneShot(_disruptionSoundClip);
             }
         }
 
