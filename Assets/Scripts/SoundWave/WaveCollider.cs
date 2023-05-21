@@ -28,6 +28,8 @@ public class WaveCollider : MonoBehaviour
 
     private Vector3 initPosition;
     private Vector3 initLPosition;
+
+    private MeshRenderer mRenderer;
     private void Start()
     {
         totalTime = timeLeft;
@@ -36,6 +38,7 @@ public class WaveCollider : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         initPosition = rb.position;
         initLPosition = transform.localPosition;
+        mRenderer = GetComponentInChildren<MeshRenderer>();
         //rb.AddForce(transform.right * speed, ForceMode.Impulse);
         
         //rb.velocity = transform.right * speed * Time.deltaTime;
@@ -62,8 +65,8 @@ public class WaveCollider : MonoBehaviour
             rend.SetPosition(1, next.transform.position - transform.position);
             //Set Color opacity
             rend.startColor = new Color(tint.r,tint.g, tint.b, timeLeft / totalTime);
-            
-
+            //Add renderer here
+            mRenderer.materials[0].SetColor("_BaseColor", new Color(tint.r, tint.g, tint.b, timeLeft / totalTime));
             rend.endColor = rend.startColor;
         }
         else
@@ -150,7 +153,7 @@ public class WaveCollider : MonoBehaviour
             
             EnemyEffect effect = new Damage(Mathf.RoundToInt(damage));
             e.AddEffect(effect);
-            effect = new ChangeSpeed(disruption, playerValues.disruptionDuration);
+            effect = new ChangeSpeed(1-disruption, playerValues.disruptionDuration);
             e.AddEffect(effect);
         }
     }

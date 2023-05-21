@@ -414,6 +414,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1026185147}
     m_Modifications:
+    - target: {fileID: 7005668813226672904, guid: 4c5bc4d8826be484bb69f9cdd36d8993, type: 3}
+      propertyPath: m_UseWorldSpace
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7005668815130473419, guid: 4c5bc4d8826be484bb69f9cdd36d8993, type: 3}
       propertyPath: editorData.vertexPathUpToDate
       value: 0
@@ -1389,6 +1393,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 784344587}
+    - target: {fileID: 3226258948680958362, guid: 7f1188180779889438ce02e159ae857d, type: 3}
+      propertyPath: deflectorCount
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3226258948680958363, guid: 7f1188180779889438ce02e159ae857d, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1776,6 +1784,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1026185147}
     m_Modifications:
+    - target: {fileID: 7138034248541743576, guid: 9ae449a10480910468d3c8e3514f1d94, type: 3}
+      propertyPath: m_UseWorldSpace
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7138034249003345176, guid: 9ae449a10480910468d3c8e3514f1d94, type: 3}
       propertyPath: editorData.vertexPathUpToDate
       value: 0
@@ -1924,6 +1936,10 @@ PrefabInstance:
     - target: {fileID: 6377353694968120083, guid: a65634493a219924d9a58c1985de85e0, type: 3}
       propertyPath: m_Name
       value: 'R2 - EnemyPath  '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6377353695526391692, guid: a65634493a219924d9a58c1985de85e0, type: 3}
+      propertyPath: m_UseWorldSpace
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a65634493a219924d9a58c1985de85e0, type: 3}
@@ -2372,6 +2388,10 @@ PrefabInstance:
       propertyPath: editorData._bezierPath.points.Array.data[10].z
       value: 5.4907804
       objectReference: {fileID: 0}
+    - target: {fileID: 473795577270188247, guid: cc345423bb8946a419dcb4c1fb8ae519, type: 3}
+      propertyPath: m_UseWorldSpace
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc345423bb8946a419dcb4c1fb8ae519, type: 3}
 --- !u!4 &1711379403 stripped
@@ -2446,20 +2466,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3562342490931505495, guid: 889f289b7dab0244399e039891d1b1ec, type: 3}
+      propertyPath: editorData._bezierPath.points.Array.data[0].z
+      value: 0.2648964
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562342490931505495, guid: 889f289b7dab0244399e039891d1b1ec, type: 3}
       propertyPath: editorData._bezierPath.points.Array.data[1].x
-      value: -4.106556
+      value: -4.1069965
       objectReference: {fileID: 0}
     - target: {fileID: 3562342490931505495, guid: 889f289b7dab0244399e039891d1b1ec, type: 3}
       propertyPath: editorData._bezierPath.points.Array.data[1].z
-      value: 0.4781744
+      value: 0.35016122
       objectReference: {fileID: 0}
     - target: {fileID: 3562342490931505495, guid: 889f289b7dab0244399e039891d1b1ec, type: 3}
       propertyPath: editorData._bezierPath.points.Array.data[2].x
-      value: -7.139311
+      value: -7.1401916
       objectReference: {fileID: 0}
     - target: {fileID: 3562342490931505495, guid: 889f289b7dab0244399e039891d1b1ec, type: 3}
       propertyPath: editorData._bezierPath.points.Array.data[2].z
-      value: 0.43634927
+      value: 0.43542606
       objectReference: {fileID: 0}
     - target: {fileID: 3562342490931505495, guid: 889f289b7dab0244399e039891d1b1ec, type: 3}
       propertyPath: editorData._bezierPath.points.Array.data[3].x
@@ -2467,11 +2491,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3562342490931505495, guid: 889f289b7dab0244399e039891d1b1ec, type: 3}
       propertyPath: editorData._bezierPath.points.Array.data[4].x
-      value: -7.2759385
+      value: -7.273995
       objectReference: {fileID: 0}
     - target: {fileID: 3562342490931505495, guid: 889f289b7dab0244399e039891d1b1ec, type: 3}
       propertyPath: editorData._bezierPath.points.Array.data[4].z
-      value: 0.57146657
+      value: 0.57339144
       objectReference: {fileID: 0}
     - target: {fileID: 3562342490931505495, guid: 889f289b7dab0244399e039891d1b1ec, type: 3}
       propertyPath: editorData._bezierPath.points.Array.data[5].x
@@ -2573,6 +2597,14 @@ PrefabInstance:
       propertyPath: editorData._bezierPath.points.Array.data[17].z
       value: 6.8047
       objectReference: {fileID: 0}
+    - target: {fileID: 3562342491970326397, guid: 889f289b7dab0244399e039891d1b1ec, type: 3}
+      propertyPath: m_UseWorldSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3562342491970326397, guid: 889f289b7dab0244399e039891d1b1ec, type: 3}
+      propertyPath: m_Positions.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 889f289b7dab0244399e039891d1b1ec, type: 3}
 --- !u!4 &1711941076 stripped
@@ -2634,7 +2666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1983005158
 MonoBehaviour:
   m_ObjectHideFlags: 0

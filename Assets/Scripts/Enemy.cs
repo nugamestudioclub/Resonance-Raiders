@@ -90,6 +90,7 @@ public class Enemy : MonoBehaviour
      */
     public void ReduceHealth(int red)
     {
+        print("Reduced health by " + red);
         _health -= red;
     }
 
