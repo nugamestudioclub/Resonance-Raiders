@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
             this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, deg);
         }
 
-        GetComponentInChildren<Transform>().localScale = initScale * (_health+.5f /initHealth);
+        GetComponentInChildren<Transform>().localScale = initScale * ((_health /(initHealth*2))+0.5f);
     }
 
     /**
