@@ -33,14 +33,9 @@ public class UIMethodWrapper : MonoBehaviour
         controller.ChangeState(UIController.UIState.Building);
     }
 
-    public void GotoNone()
-    {
-        controller.ChangeState(UIController.UIState.None);
-    }
-
     public void GotoGame()
     {
-        controller.ChangeState(UIController.UIState.None);
+        controller.ChangeState(UIController.UIState.InGame);
         panControl.AnimateCameraPosition(CameraPanControl.CameraPositions.Destination);
     }
 

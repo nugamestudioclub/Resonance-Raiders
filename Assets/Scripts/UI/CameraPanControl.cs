@@ -19,7 +19,7 @@ public class CameraPanControl : MonoBehaviour
     void Start()
     {
         camcam = Camera.main;
-        camcam.transform.Translate(Vector3.up * initialYOffset);
+        camcam.transform.position += Vector3.up * initialYOffset;
     }
 
     public void AnimateCameraPosition(CameraPositions pos)

@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 2761903001768912960}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,6 +289,7 @@ MonoBehaviour:
   _shootingPointTransform: {fileID: 2761903003401899520}
   _destructionObjectPool: {fileID: 0}
   _disruptionObjectPool: {fileID: 0}
+  _playerTransform: {fileID: 0}
   _playerValues: {fileID: 11400000, guid: 0cb0b5acc066f0a45b05505d0dca2c03, type: 2}
   _destructionCooldownTimer: 0
   _disruptionCooldownTimer: 0

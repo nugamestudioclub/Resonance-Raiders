@@ -4,6 +4,7 @@ using System;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField] GameObject gameUI;
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject credits;
     [SerializeField] GameObject pauseMenu;
@@ -11,7 +12,7 @@ public class UIController : MonoBehaviour
 
     public enum UIState
     {
-        None,
+        InGame,
         MainMenu,
         Credits,
         PauseMenu,
@@ -31,6 +32,7 @@ public class UIController : MonoBehaviour
     {
         // set up the child dictionary
         _childMap = new Dictionary<UIState, RectTransform[]>();
+        _childMap.Add(UIState.InGame, gameUI.GetComponentsInChildren<RectTransform>());
         _childMap.Add(UIState.MainMenu, mainMenu.GetComponentsInChildren<RectTransform>());
         _childMap.Add(UIState.Credits, credits.GetComponentsInChildren<RectTransform>());
         _childMap.Add(UIState.PauseMenu, pauseMenu.GetComponentsInChildren<RectTransform>());
@@ -55,6 +57,7 @@ public class UIController : MonoBehaviour
         // set up the parent dictionary
         _objectMap = new Dictionary<UIState, GameObject>();
 
+        _objectMap.Add(UIState.InGame, gameUI);
         _objectMap.Add(UIState.MainMenu, mainMenu);
         _objectMap.Add(UIState.Credits, credits);
         _objectMap.Add(UIState.PauseMenu, pauseMenu);
@@ -68,9 +71,10 @@ public class UIController : MonoBehaviour
     void Start()
     {
         // animate into the main menu
-        //Invoke(nameof(test), 2f);
+        EnableUI(UIState.MainMenu);
     }
 
+    // tweens out the old UI and initiates tweening in of the new as well as toggling it
     public void ChangeState(UIState state)
     {
         // this works because by the time the onComplete method is invoked, the priorState field will
@@ -79,22 +83,30 @@ public class UIController : MonoBehaviour
             () => { ToggleParent(_objectMap[_priorState], false); }
         );
 
-        if (state != UIState.None)
-        {
-            ToggleParent(_objectMap[state], true);
+        EnableUI(state);
+    }
 
-            StartTweenOnAll(_childMap[state], Vector3.one, 0.5f);
-        }
+    // enables the UI header and tweens in all of its children
+    void EnableUI(UIState state)
+    {
+        ToggleParent(_objectMap[state], true);
+
+        StartTweenOnAll(_childMap[state], Vector3.one, 0.5f);
 
         _priorState = _currentState;
         _currentState = state;
     }
 
+    // toggles the gameobject to state
     void ToggleParent(GameObject parent, bool state)
     {
+        // if nothing to update, nothing doing
+        if (parent.activeInHierarchy == state) return;
+
         parent.SetActive(state);
     }
 
+    // starts tweening on all recttransform children of a UI parent
     int[] StartTweenOnAll(RectTransform[] objects, Vector3 tweenDest, float tweenTime, Action action = null)
     {
         int[] tweenIds = new int[objects.Length];
