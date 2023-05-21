@@ -30,6 +30,8 @@ public class WaveCollider : MonoBehaviour
     private Vector3 initLPosition;
 
     private MeshRenderer mRenderer;
+
+    private float timeSinceLastBounce = 0f;
     private void Start()
     {
         totalTime = timeLeft;
@@ -56,6 +58,7 @@ public class WaveCollider : MonoBehaviour
         tint = ColorMixing.MixColors(playerValues.destructionColor,playerValues.distruptionColor,damage,disruption);
         mRenderer.materials[0].SetColor("_BaseColor", new Color(tint.r, tint.g, tint.b, timeLeft / totalTime));
         rb.position += velocity * Time.deltaTime * speed;
+        timeSinceLastBounce -= Time.deltaTime;
         //transform.localPosition += velocity * Time.deltaTime * speed;
         if (next != null&&Vector3.Distance(this.transform.position,next.transform.position)<splitThreshold)
         {
@@ -161,6 +164,15 @@ public class WaveCollider : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if (timeSinceLastBounce <= 0)
+        {
+            timeSinceLastBounce = 0.1f;
+
+        }
+        else
+        {
+            return;
+        }
         if (collision.gameObject.GetComponent<DeflectorComponent>() == null)
         {
             return;
@@ -183,7 +195,7 @@ public class WaveCollider : MonoBehaviour
                 
             }
             
-            print("Unique Normals:" + normals);
+            
             
             averageNormal /= contacts.Length;
 
@@ -205,7 +217,7 @@ public class WaveCollider : MonoBehaviour
             // Use the tangent vector for further calculations or processing
 
             tangent = Quaternion.Euler(0, -90, 0) * tangent;
-            velocity += tangent;
+            velocity += tangent*2;
             velocity *= velocityReductionOnHit;
         }
     }
