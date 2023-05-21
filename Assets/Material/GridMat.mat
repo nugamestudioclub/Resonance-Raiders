@@ -119,7 +119,7 @@ Material:
     - _ExclusionZone: {r: 0.02, g: -0.02, b: 0, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Tiling: {r: 26, g: 25, b: 0, a: 0}
+    - _Tiling: {r: 23, g: 23, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5870544047952740298
 MonoBehaviour:
