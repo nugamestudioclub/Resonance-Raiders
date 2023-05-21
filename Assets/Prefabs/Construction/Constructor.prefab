@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   deflectorPrefab: {fileID: 2960746161811722892, guid: ff80b68025c766745a382985b9102bc8, type: 3}
-  deflectorCount: 8
+  deflectorCount: 10
   checker: {fileID: 1750160328076563790}
   selectionBall: {fileID: 3226258948922082308}
   playerValues: {fileID: 11400000, guid: 0cb0b5acc066f0a45b05505d0dca2c03, type: 2}
@@ -81,7 +81,7 @@ Transform:
   m_GameObject: {fileID: 3226258948922082308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3226258948680958363}
