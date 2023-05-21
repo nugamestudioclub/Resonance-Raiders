@@ -779,7 +779,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3562342490931505493
 Transform:
   m_ObjectHideFlags: 0
@@ -871,7 +871,7 @@ MonoBehaviour:
     keepConstantHandleSize: 0
     showNormalsInVertexMode: 0
     showBezierPathInVertexMode: 0
-    showDisplayOptions: 0
+    showDisplayOptions: 1
     showPathOptions: 1
     showVertexPathDisplayOptions: 0
     showVertexPathOptions: 1
@@ -893,7 +893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathArrow: {fileID: 329704030284234824, guid: 413ffb5228d74074bb2eb955a1a2009f, type: 3}
   snapSize: 1
-  yOffset: 4.9
+  yOffset: -1
   arrowScale: 10
   line: {fileID: 3562342491970326397}
 --- !u!1 &3562342491970326393
