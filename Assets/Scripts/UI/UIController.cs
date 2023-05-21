@@ -84,6 +84,11 @@ public class UIController : MonoBehaviour
         EnableUI(UIState.MainMenu);
     }
 
+    public UIState GetCurrentState()
+    {
+        return _currentState;
+    }
+
     // tweens out the old UI and initiates tweening in of the new as well as toggling it
     public void ChangeState(UIState state)
     {
@@ -150,6 +155,7 @@ public class UIController : MonoBehaviour
         {
             LeanTween.scale(rt, tweenDest, tweenTime + tweenTimeOffset * index)
                 .setOnComplete(action)
+                .setIgnoreTimeScale(true)
                 .setEaseInOutBack();
 
             index += 1;
