@@ -19,6 +19,8 @@ public class DisplayPath : MonoBehaviour
     private float arrowScale = 1;
     [SerializeField]
     private LineRenderer line;
+    [SerializeField]
+    private float blockerScale = 0.9f;
 
     public void RemoveColliders()
     {
@@ -62,7 +64,7 @@ public class DisplayPath : MonoBehaviour
             BoxCollider col = line.gameObject.AddComponent<BoxCollider>();
             col.center = (point + ((nextPoint - point) / 2)) ;
             col.center = new Vector3(col.center.x, -1, col.center.z);
-            col.size = new Vector3(Mathf.Max(0.9f, Mathf.Abs(nextPoint.x - point.x)),1,Mathf.Max(0.9f,Mathf.Abs(nextPoint.z-point.z)));
+            col.size = new Vector3(Mathf.Max(blockerScale, Mathf.Abs(nextPoint.x - point.x)),1,Mathf.Max(blockerScale,Mathf.Abs(nextPoint.z-point.z)));
             col.isTrigger = false;
             
         }

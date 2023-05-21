@@ -57,10 +57,7 @@ public class GameStateController : MonoBehaviour
                 constructor.enabled = true;
                 break;
         }
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            NextRound();
-        }
+       
     }
 
     public void NextRound()

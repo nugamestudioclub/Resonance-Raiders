@@ -164,15 +164,7 @@ public class WaveCollider : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (timeSinceLastBounce <= 0)
-        {
-            timeSinceLastBounce = 0.1f;
-
-        }
-        else
-        {
-            return;
-        }
+        
         if (collision.gameObject.GetComponent<DeflectorComponent>() == null)
         {
             return;
