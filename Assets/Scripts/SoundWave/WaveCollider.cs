@@ -172,10 +172,19 @@ public class WaveCollider : MonoBehaviour
         if (contacts.Length > 0)
         {
             Vector3 averageNormal = Vector3.zero;
+            Dictionary<Vector3,int> normals = new Dictionary<Vector3, int>();
             foreach (ContactPoint contact in contacts)
             {
                 averageNormal += contact.normal;
+                if (normals.ContainsKey(contact.normal))
+                    normals[contact.normal] += 1;
+                else
+                    normals[contact.normal] = 1;
+                
             }
+            
+            print("Unique Normals:" + normals);
+            
             averageNormal /= contacts.Length;
 
             // Calculate the tangent vector to the collision surface
@@ -185,11 +194,11 @@ public class WaveCollider : MonoBehaviour
                 refVector = Vector3.right;
             }
 
-            Vector3 helper = (Mathf.Abs(averageNormal.y) < Mathf.Abs(averageNormal.x)) ? Vector3.up : Vector3.right;
+           
 
             // Create two vectors perpendicular to averageNormal using Gram-Schmidt process
             Vector3 tangent = Vector3.Cross(refVector, averageNormal).normalized;
-
+             
             //Vector3 bitangent = Vector3.Cross(averageNormal, tangent).normalized;
 
 
