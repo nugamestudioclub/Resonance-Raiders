@@ -24,6 +24,17 @@ public class DeflectorPlacer : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        selectionBall.SetActive(true);
+
+        Clear();
+    }
+
+    private void OnDisable()
+    {
+        selectionBall.SetActive(false);
+    }
 
     public void Clear()
     {
@@ -71,5 +82,10 @@ public class DeflectorPlacer : MonoBehaviour
 
         
             
+    }
+
+    public int GetCurrentCount()
+    {
+        return builtObjects.Count;
     }
 }

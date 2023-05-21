@@ -7,7 +7,7 @@ public class UIMetricUpdater : MonoBehaviour
     [SerializeField] FillController wave1;
     [SerializeField] FillController wave2;
 
-    int healthOnPriorFrame = 0;
+    int healthPrior = 0;
 
     [SerializeField] FillController health;
 
@@ -32,11 +32,12 @@ public class UIMetricUpdater : MonoBehaviour
         wave1.UpdateDisplay(1f - cooldownSource._destructionCooldownTimer * (1 / valueSource.destructionWaveCooldown));
         wave2.UpdateDisplay(1f - cooldownSource._disruptionCooldownTimer * (1 / valueSource.disruptionWaveCooldown));
 
-        if (healthOnPriorFrame != valueSource.playerHealth)
+        if (healthPrior != valueSource.playerHealth)
         {
-            health.UpdateDisplay(Random.Range(0f, 1f));
+            health.UpdateDisplay(valueSource.playerHealth / 100.0f);
         }
 
-        healthOnPriorFrame = (int)Random.Range(0f, 1f) * 100;
+        healthPrior = valueSource.playerHealth;
+
     }
 }

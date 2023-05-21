@@ -10,6 +10,8 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject building;
 
+    [SerializeField] GameObject[] contentsToToggle;
+
     public enum UIState
     {
         InGame,
@@ -38,22 +40,6 @@ public class UIController : MonoBehaviour
         _childMap.Add(UIState.PauseMenu, pauseMenu.GetComponentsInChildren<RectTransform>());
         _childMap.Add(UIState.Building, building.GetComponentsInChildren<RectTransform>());
 
-        UIState[] allButMain = new UIState[]
-        {
-            UIState.Credits, UIState.PauseMenu, UIState.Building
-        };
-
-        // set the scale of everything to zero.
-        foreach (UIState state in allButMain)
-        {
-            RectTransform[] forms = _childMap[state];
-
-            foreach (RectTransform rt in forms)
-            {
-                rt.localScale = Vector3.zero;
-            }
-        }
-
         // set up the parent dictionary
         _objectMap = new Dictionary<UIState, GameObject>();
 
@@ -63,13 +49,37 @@ public class UIController : MonoBehaviour
         _objectMap.Add(UIState.PauseMenu, pauseMenu);
         _objectMap.Add(UIState.Building, building);
 
+
+        UIState[] allButMain = new UIState[]
+        {
+            UIState.InGame, UIState.Credits, UIState.PauseMenu, UIState.Building
+        };
+
+        // set the scale of everything to zero, and disabling all non-MainMenu stuff
+        foreach (UIState state in allButMain)
+        {
+            ToggleParent(_objectMap[state], false);
+
+            RectTransform[] forms = _childMap[state];
+
+            foreach (RectTransform rt in forms)
+            {
+                rt.localScale = Vector3.zero;
+            }
+        }
+
+
         _currentState = UIState.MainMenu;
         _priorState = UIState.MainMenu;
+
+        ToggleVitalGameElements(false);
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        LeanTween.cancelAll();
+
         // animate into the main menu
         EnableUI(UIState.MainMenu);
     }
@@ -77,6 +87,21 @@ public class UIController : MonoBehaviour
     // tweens out the old UI and initiates tweening in of the new as well as toggling it
     public void ChangeState(UIState state)
     {
+        switch (state)
+        {
+            case UIState.Building:
+                ToggleVitalGameElements(true);
+                break;
+
+            case UIState.MainMenu:
+                ToggleVitalGameElements(false);
+                break;
+
+            default:
+                Debug.Log("No current implementation for toggling elements for state " + state);
+                break;
+        }
+
         // this works because by the time the onComplete method is invoked, the priorState field will
         // have been reassigned, meaning that we disable the right thing.
         StartTweenOnAll(_childMap[_currentState], Vector3.zero, 0.4f,
@@ -97,6 +122,14 @@ public class UIController : MonoBehaviour
         _currentState = state;
     }
 
+    void ToggleVitalGameElements(bool toState)
+    {
+        foreach (GameObject g in contentsToToggle)
+        {
+            g.SetActive(toState);
+        }
+    }
+
     // toggles the gameobject to state
     void ToggleParent(GameObject parent, bool state)
     {
@@ -107,24 +140,19 @@ public class UIController : MonoBehaviour
     }
 
     // starts tweening on all recttransform children of a UI parent
-    int[] StartTweenOnAll(RectTransform[] objects, Vector3 tweenDest, float tweenTime, Action action = null)
+    void StartTweenOnAll(RectTransform[] objects, Vector3 tweenDest, float tweenTime, Action action = null)
     {
-        int[] tweenIds = new int[objects.Length];
-
         int index = 0;
 
-        float tweenTimeOffset = 0.1f;
+        float tweenTimeOffset = 0.05f;
 
         foreach (RectTransform rt in objects)
         {
-            tweenIds[index] = 
-                LeanTween.scale(rt, tweenDest, tweenTime + tweenTimeOffset * index)
+            LeanTween.scale(rt, tweenDest, tweenTime + tweenTimeOffset * index)
                 .setOnComplete(action)
-                .setEaseInOutBack()
-                .id;
+                .setEaseInOutBack();
 
             index += 1;
         }
-        return tweenIds;
     }
 }
