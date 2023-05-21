@@ -39,8 +39,9 @@ public class WaveCollider : MonoBehaviour
         initPosition = rb.position;
         initLPosition = transform.localPosition;
         mRenderer = GetComponentInChildren<MeshRenderer>();
-        //rb.AddForce(transform.right * speed, ForceMode.Impulse);
         
+        //rb.AddForce(transform.right * speed, ForceMode.Impulse);
+
         //rb.velocity = transform.right * speed * Time.deltaTime;
     }
     public void ResetPos()
@@ -53,7 +54,7 @@ public class WaveCollider : MonoBehaviour
     private void Update()
     {
         tint = ColorMixing.MixColors(playerValues.destructionColor,playerValues.distruptionColor,damage,disruption);
-        
+        mRenderer.materials[0].SetColor("_BaseColor", new Color(tint.r, tint.g, tint.b, timeLeft / totalTime));
         rb.position += velocity * Time.deltaTime * speed;
         //transform.localPosition += velocity * Time.deltaTime * speed;
         if (next != null&&Vector3.Distance(this.transform.position,next.transform.position)<splitThreshold)

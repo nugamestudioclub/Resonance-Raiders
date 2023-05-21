@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TakeDamage : MonoBehaviour
 {
+    [SerializeField]
     private int _damage = 1;
 
     [SerializeField] private PlayerValues _playerValues;

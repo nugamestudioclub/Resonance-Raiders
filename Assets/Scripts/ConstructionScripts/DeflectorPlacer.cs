@@ -55,6 +55,8 @@ public class DeflectorPlacer : MonoBehaviour
             Vector3 gridBasedPoint = new Vector3(Mathf.Round(p.x), Mathf.Round(p.y), Mathf.Round(p.z)) * playerValues.gridSize;
             selectionBall.transform.position = new Vector3(gridBasedPoint.x, 1, gridBasedPoint.z);
             print("Can build?:" + (!checker.HasCollision() && deflectorCount > builtObjects.Count).ToString());
+            print("Checker:" + checker.HasCollision());
+            print("Deflector:" + (deflectorCount > builtObjects.Count));
             if (Input.GetMouseButtonDown(0)&&!checker.HasCollision()&&deflectorCount>builtObjects.Count)
             {
                 
