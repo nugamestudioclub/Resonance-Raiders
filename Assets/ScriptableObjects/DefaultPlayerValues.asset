@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9158028d1971cf44f96323c881aa56ec, type: 3}
   m_Name: DefaultPlayerValues
   m_EditorClassIdentifier: 
-  playerHealth: 99
-  destructionWaveCooldown: 1
-  disruptionWaveCooldown: 0.5
+  playerHealth: 100
+  destructionWaveCooldown: 1.5
+  disruptionWaveCooldown: 0.25
   playerWaveType: 0
   destructionColor: {r: 1, g: 0, b: 0, a: 1}
   distruptionColor: {r: 0, g: 0.4349532, b: 1, a: 1}
