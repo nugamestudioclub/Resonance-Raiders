@@ -17,6 +17,8 @@ public class DeflectorPlacer : MonoBehaviour
     private List<GameObject> builtObjects = new List<GameObject>();
 
     private Vector3 sBallOffset;
+    [SerializeField]
+    private GameObject grid;
 
     private void OnEnable()
     {
@@ -63,6 +65,8 @@ public class DeflectorPlacer : MonoBehaviour
                 GameObject deflector = Instantiate(deflectorPrefab, transform);
                 deflector.transform.position = new Vector3(gridBasedPoint.x, 1, gridBasedPoint.z);
                 builtObjects.Add(deflector);
+                
+                
                 
             }
         }

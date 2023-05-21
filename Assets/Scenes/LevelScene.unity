@@ -1254,6 +1254,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 784344587}
     - target: {fileID: 3226258948680958362, guid: 7f1188180779889438ce02e159ae857d, type: 3}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 2077109329}
+    - target: {fileID: 3226258948680958362, guid: 7f1188180779889438ce02e159ae857d, type: 3}
       propertyPath: deflectorCount
       value: 20
       objectReference: {fileID: 0}
@@ -2351,6 +2355,11 @@ Transform:
   m_Father: {fileID: 1315378140}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2077109329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6300952127524494421, guid: 475d8dbe5d4abe94793e48bfe5c8c44a, type: 3}
+  m_PrefabInstance: {fileID: 6300952126977029428}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &417824372154392089
 PrefabInstance:
   m_ObjectHideFlags: 0
