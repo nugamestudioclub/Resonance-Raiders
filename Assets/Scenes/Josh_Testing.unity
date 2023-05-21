@@ -239,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathArrow: {fileID: 329704030284234824, guid: 413ffb5228d74074bb2eb955a1a2009f, type: 3}
   snapSize: 1
+  yOffset: 1
 --- !u!1 &959288568
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c3489864d1c034a951273a247410fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 5430658189470056810, guid: 877fd5daf9d47db46bc6baaf406fe3a0, type: 3}
+  enemyPrefab: {fileID: 73751574783344123, guid: 877fd5daf9d47db46bc6baaf406fe3a0, type: 3}
   timeBetweenSpawn: 1
 --- !u!4 &959288570
 Transform:
@@ -517,7 +518,8 @@ MonoBehaviour:
   <round>k__BackingField: 0
   spawner: {fileID: 959288569}
   roundDataList:
-  - {pathCreator: {fileID: 441696586}, enemyCount: 10}
+  - pathCreator: {fileID: 441696586}
+    enemyCount: 10
 --- !u!4 &1862003487
 Transform:
   m_ObjectHideFlags: 0

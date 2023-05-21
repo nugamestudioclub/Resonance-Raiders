@@ -110,7 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4443c842a29cf0f4d9c66a1824112848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 1
+  _health: 20
   pathCreator: {fileID: 0}
   <baseSpeed>k__BackingField: 3
   speed: 0
+  yOffset: 1
+  _collider: {fileID: 0}

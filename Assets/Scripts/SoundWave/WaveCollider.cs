@@ -26,15 +26,26 @@ public class WaveCollider : MonoBehaviour
     public WaveType type;
     public PlayerValues playerValues;
 
+    private Vector3 initPosition;
+    private Vector3 initLPosition;
     private void Start()
     {
         totalTime = timeLeft;
         lineRenderer.GetComponent<LineRenderer>().enabled = false;
         //velocity = transform.forward;
         rb = GetComponent<Rigidbody>();
+        initPosition = rb.position;
+        initLPosition = transform.localPosition;
         //rb.AddForce(transform.right * speed, ForceMode.Impulse);
         
         //rb.velocity = transform.right * speed * Time.deltaTime;
+    }
+    public void ResetPos()
+    {
+        this.gameObject.SetActive(true);
+        this.timeLeft = totalTime;
+        rb.position = initPosition;
+        transform.localPosition = initLPosition;
     }
     private void Update()
     {
@@ -63,7 +74,9 @@ public class WaveCollider : MonoBehaviour
         timeLeft -= Time.deltaTime;
         if (timeLeft <= 0)
         {
+            //this.gameObject.SetActive(false);
             this.gameObject.SetActive(false);
+            //Destroy(this.gameObject);
         }
 
         if (transform.position.x > playerValues.xBoundary[1]||transform.position.x < playerValues.xBoundary[0] || transform.position.z > playerValues.yBoundary[1] || transform.position.z < playerValues.yBoundary[0])
@@ -145,7 +158,7 @@ public class WaveCollider : MonoBehaviour
     {
         
         Physics.IgnoreCollision(collision.collider, this.GetComponent<SphereCollider>(), true);
-        print("collided!");
+        
 
         ContactPoint[] contacts = collision.contacts;
         if (contacts.Length > 0)
@@ -161,7 +174,7 @@ public class WaveCollider : MonoBehaviour
             Vector3 tangent = Vector3.Cross(Vector3.up, averageNormal).normalized;
 
             // Use the tangent vector for further calculations or processing
-            Debug.Log("Tangent: " + tangent);
+            
             tangent = Quaternion.Euler(0, -90, 0) * tangent;
             velocity += tangent * 2;
             velocity *= velocityReductionOnHit;

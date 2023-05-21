@@ -17,23 +17,49 @@ public class GameStateController : MonoBehaviour
     [SerializeField]
     List<RoundData> roundDataList = new List<RoundData>();
 
+    public DeflectorPlacer constructor;
+    public ShootProjectile player;
+
     // Start is called before the first frame update
     void Start()
     {
-        NextRound();
+        int _r = 0;
+        foreach(RoundData r in roundDataList)
+        {
+            if (_r != 0)
+            {
+                r.pathCreator.gameObject.SetActive(false);
+            }
+            _r++;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         switch(state)
         {
             case GameState.COMBAT:
+                constructor.enabled = false;
+                player.enabled = true;
                 if (spawner.FinishedSpawning())
                 {
-                    ChangeState(GameState.PRELIMINARY);
+                    constructor.enabled = true;
+                    constructor.Clear();
+                    
+                    NextRound();
+                    //ChangeState(GameState.PRELIMINARY);
                 }
                 break;
+            case GameState.PRELIMINARY:
+                player.enabled = false;
+                constructor.enabled = true;
+                break;
+        }
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            NextRound();
         }
     }
 
@@ -42,11 +68,25 @@ public class GameStateController : MonoBehaviour
         switch(state)
         {
             case GameState.PRELIMINARY:
+                
                 ChangeState(GameState.COMBAT);
-                spawner.SpawnEnemies(roundDataList[round++]);
+                roundDataList[round].pathCreator.GetComponent<DisplayPath>().RemoveColliders();
+              
+                spawner.SpawnEnemies(roundDataList[round]);
+                
                 break;
             case GameState.COMBAT:
-                Debug.Log("Can't start a round while a round is running");
+              
+                ChangeState(GameState.PRELIMINARY);
+                roundDataList[round].pathCreator.gameObject.SetActive(false);
+                round = round + 1;
+                if (round >= roundDataList.Count)
+                {
+                    //Scene Transition
+                    //Win screen
+                }
+                roundDataList[round].pathCreator.gameObject.SetActive(true);
+                //Debug.Log("Can't start a round while a round is running");
                 break;
         }
     }
