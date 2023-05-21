@@ -154,7 +154,7 @@ public class WaveCollider : MonoBehaviour
             
             EnemyEffect effect = new Damage(Mathf.RoundToInt(damage));
             e.AddEffect(effect);
-            effect = new ChangeSpeed(1-disruption, playerValues.disruptionDuration);
+            effect = new ChangeSpeed(Mathf.Max(1-disruption,0), playerValues.disruptionDuration);
             e.AddEffect(effect);
             this.gameObject.SetActive(false);
         }
