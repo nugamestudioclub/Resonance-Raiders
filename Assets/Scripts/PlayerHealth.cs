@@ -19,6 +19,6 @@ public class PlayerHealth : MonoBehaviour
     private void Update()
     {
         _healthSlider.value = _playerValues.playerHealth / _maxHealth;
-        print(_playerValues.playerHealth / _maxHealth);
+        //print(_playerValues.playerHealth / _maxHealth);
     }
 }

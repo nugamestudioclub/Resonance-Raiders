@@ -23,4 +23,7 @@ public class PlayerValues : ScriptableObject
     public Vector2 xBoundary = new Vector2(-15, 15);
     public Vector2 yBoundary = new Vector2(-15, 15);
 
+    public float defaultDisruptionDamage = 1f;
+    public float defaultDestructionDamage = 1f;
+
 }

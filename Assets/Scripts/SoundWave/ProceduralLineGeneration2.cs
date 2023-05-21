@@ -111,6 +111,7 @@ public class ProceduralLineGeneration2 : MonoBehaviour
     void Start()
     {
         
+
     }
     private void OnEnable()
     {
@@ -158,13 +159,13 @@ public class ProceduralLineGeneration2 : MonoBehaviour
             switch (type)
             {
                 case WaveCollider.WaveType.DAMAGE:
-                    collider.damage = 1;
+                    collider.damage = playerValues.defaultDestructionDamage;
                     collider.disruption = 0;
 
                     break;
                 case WaveCollider.WaveType.DISRUPTION:
                     collider.damage = 0;
-                    collider.disruption = 1;
+                    collider.disruption = playerValues.defaultDisruptionDamage;
 
                     break;
             }

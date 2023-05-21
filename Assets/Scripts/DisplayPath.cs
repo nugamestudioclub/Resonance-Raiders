@@ -50,13 +50,15 @@ public class DisplayPath : MonoBehaviour
     void MakePath()
     {
         List<Vector3> points = Utils.GetPathPoints(_pathCreator, snapSize);
-        line.positionCount = points.Count*2;
-        for (int i = 0; i < points.Count - 1; i++)
+        line.positionCount = points.Count;
+        //line.useWorldSpace = true;
+        for (int i = 0; i < points.Count-1; i++)
         {
             Vector3 point = points[i];
             Vector3 nextPoint = points[i + 1];
-            line.SetPosition(i*2, points[i]+Vector3.up*yOffset);
-            line.SetPosition(1+(i*2), points[i]+Vector3.up*yOffset);
+            
+            line.SetPosition(i, points[i]);
+            //line.SetPosition(1+(i*2), points[i]+Vector3.up*yOffset);
             BoxCollider col = line.gameObject.AddComponent<BoxCollider>();
             col.center = (point + ((nextPoint - point) / 2)) ;
             col.center = new Vector3(col.center.x, -1, col.center.z);
@@ -64,6 +66,7 @@ public class DisplayPath : MonoBehaviour
             col.isTrigger = false;
             
         }
+        line.SetPosition(line.positionCount - 1, points[points.Count - 1]);
     }
 
     void OnPathChanged()
