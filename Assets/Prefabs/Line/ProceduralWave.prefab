@@ -322,15 +322,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740f56506edc35c45a3d025a7994fc83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 2
-  depth: 3
+  width: 1
+  depth: 1.25
   verticesCount: 9
   spread: 0.0000001
   velocityMultiplierOnHit: 0.9
   clipDistance: 5
   colliders: []
   colliderRadius: 0.1
-  speed: 6
+  speed: 8
   colliderPrefab: {fileID: 8614310017025613750, guid: 14e68637ce1f71f46bc73e08dc1175ed, type: 3}
   initialVelocity: {x: 1, y: 0, z: 0}
   type: 0
