@@ -19,9 +19,14 @@ public class Enemy : MonoBehaviour
 
     public Collider _collider;
 
+    private Vector3 initScale;
+    private float initHealth;
+
     // Start is called before the first frame update
     void Start()
     {
+        initScale = GetComponentInChildren<Transform>().localScale;
+        initHealth = _health;
         speed = baseSpeed;
         if (pathCreator == null)
         {
@@ -71,6 +76,8 @@ public class Enemy : MonoBehaviour
             deg = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
             this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, deg);
         }
+
+        GetComponentInChildren<Transform>().localScale = initScale * ((_health /(initHealth*2))+0.5f);
     }
 
     /**

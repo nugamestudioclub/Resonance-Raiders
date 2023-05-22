@@ -29,9 +29,10 @@ public class ChangeAudioClip : MonoBehaviour
         if (combatIsPlaying)
         {
             _preliminaryAudioSource.Play();
-            _preliminaryAudioSource.volume += Time.deltaTime;
+            _preliminaryAudioSource.volume = Mathf.Clamp(_preliminaryAudioSource.volume+Time.deltaTime,0,1);
 
-            _combatAudioSource.volume -= Time.deltaTime;
+            
+            _combatAudioSource.volume = Mathf.Clamp(_combatAudioSource.volume - Time.deltaTime, 0, 1);
             if (_combatAudioSource.volume <= 0f)
             {
                 _combatAudioSource.Stop();
@@ -48,7 +49,8 @@ public class ChangeAudioClip : MonoBehaviour
             _combatAudioSource.Play();
             _combatAudioSource.volume += Time.deltaTime;
 
-            _preliminaryAudioSource.volume -= Time.deltaTime;
+            _combatAudioSource.volume = Mathf.Clamp(_combatAudioSource.volume + Time.deltaTime, 0, 1);
+            _preliminaryAudioSource.volume = Mathf.Clamp(_preliminaryAudioSource.volume - Time.deltaTime, 0, 1);
             if (_preliminaryAudioSource.volume <= 0f)
             {
                 _preliminaryAudioSource.Stop();

@@ -30,6 +30,8 @@ public class WaveCollider : MonoBehaviour
     private Vector3 initLPosition;
 
     private MeshRenderer mRenderer;
+
+    private float timeSinceLastBounce = 0f;
     private void Start()
     {
         totalTime = timeLeft;
@@ -56,6 +58,7 @@ public class WaveCollider : MonoBehaviour
         tint = ColorMixing.MixColors(playerValues.destructionColor,playerValues.distruptionColor,damage,disruption);
         mRenderer.materials[0].SetColor("_BaseColor", new Color(tint.r, tint.g, tint.b, timeLeft / totalTime));
         rb.position += velocity * Time.deltaTime * speed;
+        timeSinceLastBounce -= Time.deltaTime;
         //transform.localPosition += velocity * Time.deltaTime * speed;
         if (next != null&&Vector3.Distance(this.transform.position,next.transform.position)<splitThreshold)
         {
@@ -161,6 +164,7 @@ public class WaveCollider : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        
         if (collision.gameObject.GetComponent<DeflectorComponent>() == null)
         {
             return;
@@ -172,10 +176,19 @@ public class WaveCollider : MonoBehaviour
         if (contacts.Length > 0)
         {
             Vector3 averageNormal = Vector3.zero;
+            Dictionary<Vector3,int> normals = new Dictionary<Vector3, int>();
             foreach (ContactPoint contact in contacts)
             {
                 averageNormal += contact.normal;
+                if (normals.ContainsKey(contact.normal))
+                    normals[contact.normal] += 1;
+                else
+                    normals[contact.normal] = 1;
+                
             }
+            
+            
+            
             averageNormal /= contacts.Length;
 
             // Calculate the tangent vector to the collision surface
@@ -185,18 +198,18 @@ public class WaveCollider : MonoBehaviour
                 refVector = Vector3.right;
             }
 
-            Vector3 helper = (Mathf.Abs(averageNormal.y) < Mathf.Abs(averageNormal.x)) ? Vector3.up : Vector3.right;
+           
 
             // Create two vectors perpendicular to averageNormal using Gram-Schmidt process
             Vector3 tangent = Vector3.Cross(refVector, averageNormal).normalized;
-
+             
             //Vector3 bitangent = Vector3.Cross(averageNormal, tangent).normalized;
 
 
             // Use the tangent vector for further calculations or processing
 
             tangent = Quaternion.Euler(0, -90, 0) * tangent;
-            velocity += tangent;
+            velocity += tangent*2;
             velocity *= velocityReductionOnHit;
         }
     }
