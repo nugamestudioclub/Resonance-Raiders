@@ -5,8 +5,12 @@ using UnityEngine;
 public class LookAtCamera : MonoBehaviour
 {
 
-    public Camera worldCamera;
+    private Camera worldCamera;
 
+    private void Start()
+    {
+        worldCamera = Camera.main;
+    }
     // Update is called once per frame
     void Update()
     {
