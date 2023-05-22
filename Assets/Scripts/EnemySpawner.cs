@@ -29,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
             waitSpawnTime = timeBetweenSpawn;
             Instantiate(spawnStack.Pop(), transform);
         }
+
     }
 
     public void SpawnEnemies(RoundData data)

@@ -17,8 +17,15 @@ public class GameStateController : MonoBehaviour
     [SerializeField]
     List<RoundData> roundDataList = new List<RoundData>();
 
+    public bool gameIsOver = false;
+
     public DeflectorPlacer constructor;
     public ShootProjectile player;
+
+    private void Awake()
+    {
+        Controller = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +41,21 @@ public class GameStateController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        gameIsOver = false;
+        round = 0;
+    }
+
     // Update is called once per frame
     void Update()
     {
         
+        if (Time.timeScale == 0f)
+        {
+            return;
+        }
+
         switch(state)
         {
             case GameState.COMBAT:
@@ -82,8 +100,7 @@ public class GameStateController : MonoBehaviour
                 round = round + 1;
                 if (round >= roundDataList.Count)
                 {
-                    //Scene Transition
-                    //Win screen
+                    gameIsOver = true;
                 }
                 roundDataList[round].pathCreator.gameObject.SetActive(true);
                 //Debug.Log("Can't start a round while a round is running");

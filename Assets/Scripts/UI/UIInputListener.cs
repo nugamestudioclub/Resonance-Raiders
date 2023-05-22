@@ -1,10 +1,13 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class UIInputListener : MonoBehaviour
 {
     Action<UIController.UIState> changeStateInvocation;
     Func<UIController.UIState> getStateInvocation;
+
+    [SerializeField] List<UIController.UIState> denyTransitionFrom;
 
     private UIController.UIState _stateBeforePause;
 
@@ -26,21 +29,35 @@ public class UIInputListener : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            var result = getStateInvocation.Invoke();
+            ForceStateChange(getStateInvocation.Invoke());
+        }
+    }
 
-            if (result != UIController.UIState.PauseMenu)
-            {
-                _stateBeforePause = result;
+    public void RevertFromPause()
+    {
+        Time.timeScale = 1f;
 
-                Time.timeScale = 0f;
+        changeStateInvocation.Invoke(_stateBeforePause);
+    }
 
-                changeStateInvocation.Invoke(UIController.UIState.PauseMenu);
-            } else
-            {
-                Time.timeScale = 1f;
+    void ForceStateChange(UIController.UIState state)
+    {
+        if (denyTransitionFrom.Contains(state))
+        {
+            return;
+        }
 
-                changeStateInvocation.Invoke(_stateBeforePause);
-            }
+        if (state != UIController.UIState.PauseMenu)
+        {
+            _stateBeforePause = state;
+
+            Time.timeScale = 0f;
+
+            changeStateInvocation.Invoke(UIController.UIState.PauseMenu);
+        }
+        else
+        {
+            RevertFromPause();
         }
     }
 }

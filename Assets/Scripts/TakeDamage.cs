@@ -9,17 +9,28 @@ public class TakeDamage : MonoBehaviour
 
     [SerializeField] private PlayerValues _playerValues;
 
+    private void Awake()
+    {
+        int newDamage = (int)_playerValues.defaultDisruptionDamage;
+
+        if (newDamage != _damage)
+        {
+            Debug.LogWarning(string.Format("Player Damage has been modified from {0} to {1}.", _damage, newDamage));
+        }
+
+        _damage = newDamage;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Enemy>() != null)
         {
-            Debug.Log("Player took damage");
             _playerValues.playerHealth -= _damage;
 
             if (_playerValues.playerHealth <= 0)
             {
                 _playerValues.playerHealth = 0;
-                Debug.Log("Player out of health");
+                GameStateController.Controller.gameIsOver = true;
             }
         }
     }

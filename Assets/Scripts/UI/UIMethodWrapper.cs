@@ -47,6 +47,12 @@ public class UIMethodWrapper : MonoBehaviour
         controller.ChangeState(UIController.UIState.InGame);
     }
 
+    public void GotoGameEnd()
+    {
+        panControl.AnimateCameraPosition(CameraPanControl.CameraPositions.Initial);
+        controller.ChangeState(UIController.UIState.GameEnd);
+    }
+
     public void ExitGame()
     {
         Application.Quit();

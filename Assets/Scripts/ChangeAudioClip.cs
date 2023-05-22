@@ -13,7 +13,6 @@ public class ChangeAudioClip : MonoBehaviour
 
     private void Update()
     {
-       
         switch (_gameStateController.state)
         {
             case GameState.COMBAT:

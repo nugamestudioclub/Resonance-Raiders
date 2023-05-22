@@ -29,8 +29,6 @@ public class DeflectorPlacer : MonoBehaviour
     private void OnEnable()
     {
         selectionBall.SetActive(true);
-
-        Clear();
     }
 
     private void OnDisable()
@@ -49,7 +47,11 @@ public class DeflectorPlacer : MonoBehaviour
 
     void Update()
     {
-        
+        if (UIController.wasUIRecentlyChanged)
+        {
+            return;
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 

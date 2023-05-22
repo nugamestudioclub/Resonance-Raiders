@@ -9,8 +9,11 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject credits;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject building;
+    [SerializeField] GameObject gameEnd;
 
     [SerializeField] GameObject[] contentsToToggle;
+    // yes i know this is a long name, shut up
+    [SerializeField] MonoBehaviour[] componentsToToggleWhenNotInGame;
 
     public enum UIState
     {
@@ -18,7 +21,8 @@ public class UIController : MonoBehaviour
         MainMenu,
         Credits,
         PauseMenu,
-        Building
+        Building,
+        GameEnd
     }
 
     private UIState _currentState;
@@ -30,6 +34,9 @@ public class UIController : MonoBehaviour
     // maps UIStates to all the children of the UI they belong to
     private Dictionary<UIState, RectTransform[]> _childMap;
 
+    // so very bad
+    public static bool wasUIRecentlyChanged;
+
     private void Awake()
     {
         // set up the child dictionary
@@ -39,6 +46,7 @@ public class UIController : MonoBehaviour
         _childMap.Add(UIState.Credits, credits.GetComponentsInChildren<RectTransform>());
         _childMap.Add(UIState.PauseMenu, pauseMenu.GetComponentsInChildren<RectTransform>());
         _childMap.Add(UIState.Building, building.GetComponentsInChildren<RectTransform>());
+        _childMap.Add(UIState.GameEnd, building.GetComponentsInChildren<RectTransform>());
 
         // set up the parent dictionary
         _objectMap = new Dictionary<UIState, GameObject>();
@@ -48,11 +56,12 @@ public class UIController : MonoBehaviour
         _objectMap.Add(UIState.Credits, credits);
         _objectMap.Add(UIState.PauseMenu, pauseMenu);
         _objectMap.Add(UIState.Building, building);
+        _objectMap.Add(UIState.GameEnd, gameEnd);
 
 
         UIState[] allButMain = new UIState[]
         {
-            UIState.InGame, UIState.Credits, UIState.PauseMenu, UIState.Building
+            UIState.InGame, UIState.Credits, UIState.PauseMenu, UIState.Building, UIState.GameEnd
         };
 
         // set the scale of everything to zero, and disabling all non-MainMenu stuff
@@ -84,6 +93,11 @@ public class UIController : MonoBehaviour
         EnableUI(UIState.MainMenu);
     }
 
+    private void LateUpdate()
+    {
+        wasUIRecentlyChanged = false;
+    }
+
     public UIState GetCurrentState()
     {
         return _currentState;
@@ -92,6 +106,20 @@ public class UIController : MonoBehaviour
     // tweens out the old UI and initiates tweening in of the new as well as toggling it
     public void ChangeState(UIState state)
     {
+        wasUIRecentlyChanged = true;
+
+        // if we're entering in-game ui, enable in-game stuff
+        if (state == UIState.InGame)
+        {
+            ToggleVitalGameComponents(true);
+        }
+        // if we're leaving, disable
+        else if (_currentState == UIState.InGame)
+        {
+            Debug.Log("activated");
+            ToggleVitalGameComponents(false);
+        }
+
         switch (state)
         {
             case UIState.Building:
@@ -132,6 +160,14 @@ public class UIController : MonoBehaviour
         foreach (GameObject g in contentsToToggle)
         {
             g.SetActive(toState);
+        }
+    }
+
+    void ToggleVitalGameComponents(bool toState)
+    {
+        foreach (MonoBehaviour c in componentsToToggleWhenNotInGame)
+        {
+            c.enabled = toState;
         }
     }
 
